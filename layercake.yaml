@@ -1,18 +1,26 @@
 analytics_layer_cake:
   - name: Intake
-    description: Data Sources, ETL, Transformation, and Orchestration
+    description: Bringing data into the system
     children:
    
       - name: Data Sources
         description: Systems that generate raw data such as application events, transactions, logs, and SaaS records.
         children:
           - name: Operational Databases
-            description: Databases that power live applications and store transactional data.
+            description: Databases that power live applications and store transactional data used to run the business in real time.
             children:
-              - Postgres
-              - MySQL
-              - SQL Server
-              - Oracle
+              - name: Postgres
+                description: An open-source relational database widely used for transactional workloads, application backends, and as a primary system of record for structured data.
+
+              - name: MySQL
+                description: A popular open-source relational database optimized for web applications and high-volume transactional systems.
+
+              - name: SQL Server
+                description: Microsoft’s enterprise relational database used for mission-critical business applications, reporting systems, and transactional workloads.
+
+              - name: Oracle
+                description: A high-performance enterprise relational database commonly used for large-scale, mission-critical transactional systems in regulated and complex environments.
+
           - name: SaaS Applications
             description: Cloud software systems that hold business data such as customers, billing, and support.
             children:
@@ -20,33 +28,52 @@ analytics_layer_cake:
               - Stripe
               - Zendesk
               - HubSpot
+
           - name: Event and Log Sources
-            description: Systems that generate high-volume event streams and application logs.
+            description: Systems that generate high-volume streams of behavioral events and technical logs from applications, devices, and infrastructure.
             children:
-              - Segment
-              - RudderStack
-              - Application Logs
-              - IoT Devices
+              - name: Segment
+                description: A customer data platform that collects, validates, and routes product and customer events from applications to analytics, marketing, and data warehouse destinations.
+              - name: RudderStack
+                description: An open-core event pipeline and customer data platform that routes application events into data warehouses, product analytics, and downstream tools with a warehouse-first architecture.
+              - name: Application Logs
+                description: Machine-generated records from applications and services that capture errors, performance metrics, and operational behavior for debugging, monitoring, and reliability analysis.
+              - name: IoT Devices
+                description: Physical devices and sensors that continuously emit telemetry, measurements, and status updates as event streams for monitoring, analytics, and automation.
 
       - name: Ingestion and Replication
-        description: Tools that extract data from sources and load it into analytics systems using batch or streaming pipelines.
+        description: Tools that extract data from operational systems and deliver it into analytics platforms using batch or streaming pipelines.
         children:
           - name: Batch ELT and Replication
-            description: Periodic extraction of full tables or changes from source systems into a warehouse or lake.
+            description: Systems that periodically copy data from source databases and SaaS applications into warehouses or data lakes, usually loading raw data and transforming it later.
             children:
-              - Fivetran
-              - Airbyte
-              - Stitch
+              - name: Fivetran
+                description: A fully managed ELT service that automatically replicates data from SaaS applications and databases into data warehouses with minimal configuration.
+
+              - name: Airbyte
+                description: An open-source and cloud-based data integration platform for building and running connectors to move data from many sources into analytics systems.
+
+              - name: Stitch
+                description: A lightweight cloud ETL service designed to replicate data from SaaS applications and databases into cloud data warehouses.
+
           - name: Streaming Ingestion
-            description: Continuous event and data pipelines for near real-time analytics.
+            description: Platforms that ingest and distribute continuous streams of events and messages in near real time.
             children:
-              - Apache Kafka
-              - Confluent
-              - Apache Pulsar
+              - name: Apache Kafka
+                description: The gold standard. An open-source distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
+
+              - name: Confluent
+                description: A commercial Kafka as a service.
+
+              - name: Apache Pulsar
+                description: An open source alternative to Kafka with better replication and less mindshare
+
           - name: Change Data Capture
-            description: Tools that capture database changes in real time and stream them downstream.
+            description: Technologies that monitor databases for inserts, updates, and deletes and stream those changes to downstream systems in real time.
             children:
-              - Debezium
+              - name: Debezium
+                description: An open-source change data capture platform that streams database changes from systems like Postgres and MySQL into Kafka and other downstream consumers.
+
 
       - name: Transformation and Modeling
         description: Processes that clean, join, and shape raw data into analytics-ready tables and metrics.
