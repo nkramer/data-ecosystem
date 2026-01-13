@@ -192,6 +192,19 @@ analytics_layer_cake:
               - Census
               - Polytomic
               - RudderStack
+      - name: Data apps
+        description: Custom applications for end users
+        children:
+          - name: Databricks apps
+            description: Host Python and Javascript apps in the cloud.
+          - name: Streamlit in Snowflake (SIS)
+            description: Host Python and containers in the cloud
+          - name: Posit Connect
+            description: Host R and Python data apps on-prem.
+          - name: Plotly Dash Enterprise
+            description: Host Python apps on-prem.
+          - name: Replit
+            description: Host Python apps in the cloud.
 
   - name: Catalogs
     description: Systems that track what data exists, who owns it, how it is defined, and where it is used.
