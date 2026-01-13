@@ -1,0 +1,193 @@
+analytics_layer_cake:
+  - name: Data Sources
+    description: Systems that generate raw data such as application events, transactions, logs, and SaaS records.
+    subcategories:
+      - name: Operational Databases
+        description: Databases that power live applications and store transactional data.
+        products:
+          - Postgres
+          - MySQL
+          - SQL Server
+          - Oracle
+      - name: SaaS Applications
+        description: Cloud software systems that hold business data such as customers, billing, and support.
+        products:
+          - Salesforce
+          - Stripe
+          - Zendesk
+          - HubSpot
+      - name: Event and Log Sources
+        description: Systems that generate high-volume event streams and application logs.
+        products:
+          - Segment
+          - RudderStack
+          - Application Logs
+          - IoT Devices
+
+  - name: Ingestion and Replication
+    description: Tools that extract data from sources and load it into analytics systems using batch or streaming pipelines.
+    subcategories:
+      - name: Batch ELT and Replication
+        description: Periodic extraction of full tables or changes from source systems into a warehouse or lake.
+        products:
+          - Fivetran
+          - Airbyte
+          - Stitch
+      - name: Streaming Ingestion
+        description: Continuous event and data pipelines for near real-time analytics.
+        products:
+          - Apache Kafka
+          - Confluent
+          - Apache Pulsar
+      - name: Change Data Capture
+        description: Tools that capture database changes in real time and stream them downstream.
+        products:
+          - Debezium
+
+  - name: Transformation and Modeling
+    description: Processes that clean, join, and shape raw data into analytics-ready tables and metrics.
+    subcategories:
+      - name: SQL-based ELT
+        description: Transformations executed inside the warehouse using SQL and version-controlled models.
+        products:
+          - dbt
+      - name: Distributed Processing
+        description: Engines used for large-scale data transformations and enrichment.
+        products:
+          - Apache Spark
+          - Apache Flink
+
+  - name: Orchestration and Workflow
+    description: Systems that schedule and manage data pipelines, dependencies, retries, and SLAs.
+    subcategories:
+      - name: Workflow Orchestration
+        description: Platforms that coordinate when ingestion and transformation jobs run.
+        products:
+          - Airflow
+          - Dagster
+          - Prefect
+
+  - name: Storage and Compute Platforms
+    description: Systems that store analytical data and execute large-scale queries.
+    subcategories:
+      - name: Cloud Data Warehouses
+        description: Fully managed analytics databases optimized for SQL queries.
+        products:
+          - Snowflake
+          - BigQuery
+          - Amazon Redshift
+          - Azure Synapse
+      - name: Lakehouse Platforms
+        description: Platforms that combine object storage with table formats and compute engines.
+        products:
+          - Databricks
+          - Dremio
+          - Starburst
+      - name: Object Storage
+        description: Low-cost storage for large volumes of analytical data.
+        products:
+          - Amazon S3
+          - Azure Data Lake Storage
+          - Google Cloud Storage
+          - MinIO
+
+  - name: File Formats
+    description: How data is physically stored on disk for analytical processing.
+    subcategories:
+      - name: Columnar Formats
+        description: Optimized for analytics by storing data by column instead of by row.
+        products:
+          - Parquet
+          - ORC
+      - name: Row-Based Formats
+        description: Formats optimized for data exchange and serialization.
+        products:
+          - Avro
+
+  - name: Table Formats
+    description: Metadata layers that turn files into transactional, queryable tables with schema and history.
+    subcategories:
+      - name: Open Table Formats
+        description: Standards for managing tables on object storage with ACID-like behavior.
+        products:
+          - Apache Iceberg
+          - Delta Lake
+          - Apache Hudi
+
+  - name: Query and Compute Engines
+    description: Engines that execute SQL and analytical queries over warehouses and data lakes.
+    subcategories:
+      - name: Distributed SQL Engines
+        description: High-performance SQL engines that query data across many nodes.
+        products:
+          - Trino
+          - Presto
+      - name: Warehouse and Lakehouse SQL
+        description: SQL engines embedded in data platforms.
+        products:
+          - Snowflake
+          - Databricks SQL
+          - BigQuery
+          - Redshift
+      - name: Embedded Analytics Engines
+        description: Lightweight engines for local and application-embedded analytics.
+        products:
+          - DuckDB
+
+  - name: Semantic and Metrics Layer
+    description: Business-facing definitions of metrics and dimensions that ensure consistency across tools.
+    subcategories:
+      - name: BI Semantic Models
+        description: Metric and dimension definitions embedded in BI platforms.
+        products:
+          - Looker
+          - Power BI
+      - name: Standalone Metrics Layers
+        description: Dedicated systems for defining and serving metrics to multiple tools.
+        products:
+          - dbt Semantic Layer
+          - Cube
+
+  - name: BI and Dashboards
+    description: Tools used by humans to explore data, create dashboards, and make decisions.
+    subcategories:
+      - name: Business Intelligence Platforms
+        description: Visualization, reporting, and ad-hoc analytics tools.
+        products:
+          - Tableau
+          - Power BI
+          - Looker
+          - Qlik
+          - ThoughtSpot
+
+  - name: Catalogs, Metadata, and Governance
+    description: Systems that track what data exists, who owns it, how it is defined, and where it is used.
+    subcategories:
+      - name: Enterprise Data Catalogs
+        description: Centralized platforms for discovery, lineage, and governance.
+        products:
+          - Collibra
+          - Alation
+          - Informatica
+      - name: Modern Data Catalogs
+        description: Cloud-native tools focused on usability and collaboration.
+        products:
+          - Atlan
+      - name: Platform-Native Catalogs
+        description: Metadata systems built into cloud and lakehouse platforms.
+        products:
+          - AWS Glue Data Catalog
+          - Microsoft Purview
+          - Google Dataplex
+          - Databricks Unity Catalog
+
+  - name: Reverse ETL
+    description: Tools that sync modeled warehouse data back into operational systems.
+    subcategories:
+      - name: Warehouse-to-SaaS Sync
+        description: Pushes analytics-grade metrics into CRM, marketing, and support tools.
+        products:
+          - Hightouch
+          - Census
+          - Polytomic
+          - RudderStack
