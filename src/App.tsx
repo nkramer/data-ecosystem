@@ -105,7 +105,11 @@ export default function App() {
       }
     };
 
-  const renderChildLinks = (layer: LayerNode, basePath: string[]) => {
+  const renderChildLinks = (
+    layer: LayerNode,
+    basePath: string[],
+    variant: "inline" | "list" = "inline"
+  ) => {
     if (!layer.children?.length) {
       return null;
     }
@@ -124,8 +128,26 @@ export default function App() {
         </a>
       );
 
-      if (index === layer.children!.length - 1) {
-        return [link];
+      if (variant === "list") {
+        return [
+          <div className="layer__child-row" key={`${child.name}-row`}>
+            <span className="layer__dot" aria-hidden="true" />
+            {link}
+          </div>,
+        ];
+      }
+
+      const isLast = index === layer.children!.length - 1;
+      if (index === 0) {
+        return [
+          <span className="layer__dot" aria-hidden="true" key="leading-dot" />,
+          link,
+          <span className="layer__dot" aria-hidden="true" key={`${child.name}-dot`} />,
+        ];
+      }
+
+      if (isLast) {
+        return [link, <span className="layer__dot" aria-hidden="true" key="trailing-dot" />];
       }
 
       return [
@@ -134,8 +156,11 @@ export default function App() {
       ];
     });
 
+    const className =
+      variant === "list" ? "layer__children layer__children--list" : "layer__children";
+
     return (
-      <div className="layer__children" aria-label="Child layers">
+      <div className={className} aria-label="Child layers">
         {items}
       </div>
     );
@@ -228,7 +253,7 @@ export default function App() {
               >
                 <h2 className="layer__title">{catalogLayer.name}</h2>
                 <p className="layer__description">{catalogLayer.description}</p>
-                {renderChildLinks(catalogLayer, [])}
+                {renderChildLinks(catalogLayer, [], "list")}
               </article>
             </aside>
           )}
