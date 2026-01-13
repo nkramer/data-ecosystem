@@ -34,12 +34,14 @@ body {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .page__title {
   font-size: clamp(2rem, 3vw + 1rem, 3rem);
   font-weight: 600;
   letter-spacing: 0.01em;
+  width: 100%;
 }
 
 .page__back {
@@ -95,7 +97,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 12px 24px rgba(5, 12, 25, 0.35);
   border: none;
-  text-align: left;
+  text-align: center;
 }
 
 .layer--side {
@@ -117,12 +119,14 @@ body {
   font-size: 16px;
   line-height: 1.5;
   opacity: 0.9;
+  text-align: center;
 }
 
 .layer__children {
   margin-top: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: nowrap;
   gap: 8px;
   font-size: 0.95rem;
@@ -134,6 +138,7 @@ body {
 .layer__children--list {
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
   gap: 6px;
   overflow: visible;
 }
