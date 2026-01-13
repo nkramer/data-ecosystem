@@ -1,120 +1,128 @@
 analytics_layer_cake:
-  - name: Data Sources
-    description: Systems that generate raw data such as application events, transactions, logs, and SaaS records.
+  - name: Intake
+    description: Data Sources, ETL, Transformation, and Orchestration
     children:
-      - name: Operational Databases
-        description: Databases that power live applications and store transactional data.
+   
+      - name: Data Sources
+        description: Systems that generate raw data such as application events, transactions, logs, and SaaS records.
         children:
-          - Postgres
-          - MySQL
-          - SQL Server
-          - Oracle
-      - name: SaaS Applications
-        description: Cloud software systems that hold business data such as customers, billing, and support.
-        children:
-          - Salesforce
-          - Stripe
-          - Zendesk
-          - HubSpot
-      - name: Event and Log Sources
-        description: Systems that generate high-volume event streams and application logs.
-        children:
-          - Segment
-          - RudderStack
-          - Application Logs
-          - IoT Devices
+          - name: Operational Databases
+            description: Databases that power live applications and store transactional data.
+            children:
+              - Postgres
+              - MySQL
+              - SQL Server
+              - Oracle
+          - name: SaaS Applications
+            description: Cloud software systems that hold business data such as customers, billing, and support.
+            children:
+              - Salesforce
+              - Stripe
+              - Zendesk
+              - HubSpot
+          - name: Event and Log Sources
+            description: Systems that generate high-volume event streams and application logs.
+            children:
+              - Segment
+              - RudderStack
+              - Application Logs
+              - IoT Devices
 
-  - name: Ingestion and Replication
-    description: Tools that extract data from sources and load it into analytics systems using batch or streaming pipelines.
+      - name: Ingestion and Replication
+        description: Tools that extract data from sources and load it into analytics systems using batch or streaming pipelines.
+        children:
+          - name: Batch ELT and Replication
+            description: Periodic extraction of full tables or changes from source systems into a warehouse or lake.
+            children:
+              - Fivetran
+              - Airbyte
+              - Stitch
+          - name: Streaming Ingestion
+            description: Continuous event and data pipelines for near real-time analytics.
+            children:
+              - Apache Kafka
+              - Confluent
+              - Apache Pulsar
+          - name: Change Data Capture
+            description: Tools that capture database changes in real time and stream them downstream.
+            children:
+              - Debezium
+
+      - name: Transformation and Modeling
+        description: Processes that clean, join, and shape raw data into analytics-ready tables and metrics.
+        children:
+          - name: SQL-based ELT
+            description: Transformations executed inside the warehouse using SQL and version-controlled models.
+            children:
+              - dbt
+          - name: Distributed Processing
+            description: Engines used for large-scale data transformations and enrichment.
+            children:
+              - Apache Spark
+              - Apache Flink
+
+      - name: Orchestration and Workflow
+        description: Systems that schedule and manage data pipelines, dependencies, retries, and SLAs.
+        children:
+          - name: Workflow Orchestration
+            description: Platforms that coordinate when ingestion and transformation jobs run.
+            children:
+              - Airflow
+              - Dagster
+              - Prefect
+
+  - name: Data Storage
+    description: Data Storage, File Formats, Table Formats, and Query Engines
     children:
-      - name: Batch ELT and Replication
-        description: Periodic extraction of full tables or changes from source systems into a warehouse or lake.
+   
+      - name: Storage and Compute Platforms
+        description: Systems that store analytical data and execute large-scale queries.
         children:
-          - Fivetran
-          - Airbyte
-          - Stitch
-      - name: Streaming Ingestion
-        description: Continuous event and data pipelines for near real-time analytics.
-        children:
-          - Apache Kafka
-          - Confluent
-          - Apache Pulsar
-      - name: Change Data Capture
-        description: Tools that capture database changes in real time and stream them downstream.
-        children:
-          - Debezium
+          - name: Cloud Data Warehouses
+            description: Fully managed analytics databases optimized for SQL queries.
+            children:
+              - Snowflake
+              - BigQuery
+              - Amazon Redshift
+              - Azure Synapse
+          - name: Lakehouse Platforms
+            description: Platforms that combine object storage with table formats and compute engines.
+            children:
+              - Databricks
+              - Dremio
+              - Starburst
+          - name: Object Storage
+            description: Low-cost storage for large volumes of analytical data.
+            children:
+              - Amazon S3
+              - Azure Data Lake Storage
+              - Google Cloud Storage
+              - MinIO
 
-  - name: Transformation and Modeling
-    description: Processes that clean, join, and shape raw data into analytics-ready tables and metrics.
-    children:
-      - name: SQL-based ELT
-        description: Transformations executed inside the warehouse using SQL and version-controlled models.
+      - name: File Formats
+        description: How data is physically stored on disk for analytical processing.
         children:
-          - dbt
-      - name: Distributed Processing
-        description: Engines used for large-scale data transformations and enrichment.
-        children:
-          - Apache Spark
-          - Apache Flink
+          - name: Columnar Formats
+            description: Optimized for analytics by storing data by column instead of by row.
+            children:
+              - Parquet
+              - ORC
+          - name: Row-Based Formats
+            description: Formats optimized for data exchange and serialization.
+            children:
+              - Avro
 
-  - name: Orchestration and Workflow
-    description: Systems that schedule and manage data pipelines, dependencies, retries, and SLAs.
-    children:
-      - name: Workflow Orchestration
-        description: Platforms that coordinate when ingestion and transformation jobs run.
+      - name: Table Formats
+        description: Metadata layers that turn files into transactional, queryable tables with schema and history.
         children:
-          - Airflow
-          - Dagster
-          - Prefect
+          - name: Open Table Formats
+            description: Standards for managing tables on object storage with ACID-like behavior.
+            children:
+              - Apache Iceberg
+              - Delta Lake
+              - Apache Hudi
 
-  - name: Storage and Compute Platforms
-    description: Systems that store analytical data and execute large-scale queries.
-    children:
-      - name: Cloud Data Warehouses
-        description: Fully managed analytics databases optimized for SQL queries.
-        children:
-          - Snowflake
-          - BigQuery
-          - Amazon Redshift
-          - Azure Synapse
-      - name: Lakehouse Platforms
-        description: Platforms that combine object storage with table formats and compute engines.
-        children:
-          - Databricks
-          - Dremio
-          - Starburst
-      - name: Object Storage
-        description: Low-cost storage for large volumes of analytical data.
-        children:
-          - Amazon S3
-          - Azure Data Lake Storage
-          - Google Cloud Storage
-          - MinIO
-
-  - name: File Formats
-    description: How data is physically stored on disk for analytical processing.
-    children:
-      - name: Columnar Formats
-        description: Optimized for analytics by storing data by column instead of by row.
-        children:
-          - Parquet
-          - ORC
-      - name: Row-Based Formats
-        description: Formats optimized for data exchange and serialization.
-        children:
-          - Avro
-
-  - name: Table Formats
-    description: Metadata layers that turn files into transactional, queryable tables with schema and history.
-    children:
-      - name: Open Table Formats
-        description: Standards for managing tables on object storage with ACID-like behavior.
-        children:
-          - Apache Iceberg
-          - Delta Lake
-          - Apache Hudi
-
-  - name: Query and Compute Engines
+  - name: Query and Compute
     description: Engines that execute SQL and analytical queries over warehouses and data lakes.
     children:
       - name: Distributed SQL Engines
@@ -134,7 +142,7 @@ analytics_layer_cake:
         children:
           - DuckDB
 
-  - name: Semantic and Metrics Layer
+  - name: Semantic Layer
     description: Business-facing definitions of metrics and dimensions that ensure consistency across tools.
     children:
       - name: BI Semantic Models
@@ -148,19 +156,34 @@ analytics_layer_cake:
           - dbt Semantic Layer
           - Cube
 
-  - name: BI and Dashboards
-    description: Tools used by humans to explore data, create dashboards, and make decisions.
+  - name: Output
+    description: Business Intelligence and Dashboards, Reverse ETL
     children:
-      - name: Business Intelligence Platforms
-        description: Visualization, reporting, and ad-hoc analytics tools.
+   
+      - name: Business Intelligence and Dashboards
+        description: Tools used by humans to explore data, create dashboards, and make decisions.
         children:
-          - Tableau
-          - Power BI
-          - Looker
-          - Qlik
-          - ThoughtSpot
+          - name: Business Intelligence Platforms
+            description: Visualization, reporting, and ad-hoc analytics tools.
+            children:
+              - Tableau
+              - Power BI
+              - Looker
+              - Qlik
+              - ThoughtSpot
 
-  - name: Catalogs, Metadata, and Governance
+      - name: Reverse ETL
+        description: Tools that sync modeled warehouse data back into operational systems.
+        children:
+          - name: Warehouse-to-SaaS Sync
+            description: Pushes analytics-grade metrics into CRM, marketing, and support tools.
+            children:
+              - Hightouch
+              - Census
+              - Polytomic
+              - RudderStack
+
+  - name: Catalogs
     description: Systems that track what data exists, who owns it, how it is defined, and where it is used.
     children:
       - name: Enterprise Data Catalogs
@@ -181,13 +204,3 @@ analytics_layer_cake:
           - Google Dataplex
           - Databricks Unity Catalog
 
-  - name: Reverse ETL
-    description: Tools that sync modeled warehouse data back into operational systems.
-    children:
-      - name: Warehouse-to-SaaS Sync
-        description: Pushes analytics-grade metrics into CRM, marketing, and support tools.
-        children:
-          - Hightouch
-          - Census
-          - Polytomic
-          - RudderStack
