@@ -38,20 +38,20 @@ body {
   width: 100%;
   background: #1b4fd6;
   color: #ffffff;
-  padding: 24px 32px;
+  padding: 16px 16px;
   border-radius: 12px;
   box-shadow: 0 12px 24px rgba(5, 12, 25, 0.35);
 }
 
 .layer__title {
-  font-size: clamp(1.6rem, 2vw + 1.2rem, 2.6rem);
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 400;
   letter-spacing: 0.01em;
   margin-bottom: 8px;
 }
 
 .layer__description {
-  font-size: clamp(0.95rem, 0.6vw + 0.9rem, 1.15rem);
+  font-size: 16px;
   line-height: 1.5;
   opacity: 0.9;
 }
