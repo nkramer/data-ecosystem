@@ -91,6 +91,7 @@ export default function App() {
   const detailLayers = selectedLayer?.children ?? [];
   const isDetailView = path.length > 0 && selectedLayer !== null;
   const pageTitle = selectedLayer?.name ?? "The Analytics Data Stack";
+  const pageDescription = selectedLayer?.description ?? "";
 
   const handleLayerClick = (layer: LayerNode, basePath: string[]) => {
     window.location.hash = toHash([...basePath, layer.name]);
@@ -138,16 +139,8 @@ export default function App() {
       }
 
       const isLast = index === layer.children!.length - 1;
-      if (index === 0) {
-        return [
-          <span className="layer__dot" aria-hidden="true" key="leading-dot" />,
-          link,
-          <span className="layer__dot" aria-hidden="true" key={`${child.name}-dot`} />,
-        ];
-      }
-
       if (isLast) {
-        return [link, <span className="layer__dot" aria-hidden="true" key="trailing-dot" />];
+        return [link];
       }
 
       return [
@@ -175,6 +168,9 @@ export default function App() {
     <main className="page">
       <header className="page__header">
         <h1 className="page__title">{pageTitle}</h1>
+        {pageDescription ? (
+          <p className="page__subtitle">{pageDescription}</p>
+        ) : null}
         {isDetailView && (
           <button className="page__back" type="button" onClick={handleBack}>
             {path.length === 1 ? "Back to main stack" : "Back"}

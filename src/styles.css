@@ -44,6 +44,14 @@ body {
   width: 100%;
 }
 
+.page__subtitle {
+  width: 100%;
+  margin-top: 6px;
+  font-size: 1.05rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
 .page__back {
   background: transparent;
   color: #bcd0ff;
