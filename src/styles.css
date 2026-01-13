@@ -119,6 +119,36 @@ body {
   opacity: 0.9;
 }
 
+.layer__children {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.layer__child {
+  color: #e6efff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.layer__child:hover {
+  text-decoration: underline;
+}
+
+.layer__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  display: inline-block;
+  flex: 0 0 auto;
+}
+
 .layer--interactive {
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;

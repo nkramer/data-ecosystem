@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { KeyboardEvent, useEffect, useMemo, useState } from "react";
 import YAML from "yaml";
 import layercakeRaw from "../layercake.yaml?raw";
 
@@ -96,6 +96,51 @@ export default function App() {
     window.location.hash = toHash([...basePath, layer.name]);
   };
 
+  const handleLayerKeyDown =
+    (layer: LayerNode, basePath: string[]) =>
+    (event: KeyboardEvent<HTMLElement>) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleLayerClick(layer, basePath);
+      }
+    };
+
+  const renderChildLinks = (layer: LayerNode, basePath: string[]) => {
+    if (!layer.children?.length) {
+      return null;
+    }
+
+    const layerPath = [...basePath, layer.name];
+    const items = layer.children.flatMap((child, index) => {
+      const href = `#${toHash([...layerPath, child.name])}`;
+      const link = (
+        <a
+          className="layer__child"
+          href={href}
+          key={`${child.name}-link`}
+          onClick={(event) => event.stopPropagation()}
+        >
+          {child.name}
+        </a>
+      );
+
+      if (index === layer.children!.length - 1) {
+        return [link];
+      }
+
+      return [
+        link,
+        <span className="layer__dot" aria-hidden="true" key={`${child.name}-dot`} />,
+      ];
+    });
+
+    return (
+      <div className="layer__children" aria-label="Child layers">
+        {items}
+      </div>
+    );
+  };
+
   const handleBack = () => {
     const nextPath = path.slice(0, -1);
     window.location.hash = toHash(nextPath);
@@ -113,61 +158,78 @@ export default function App() {
       </header>
       {isDetailView ? (
         <section className="stack stack--detail" aria-label={pageTitle}>
-          {detailLayers.map((layer) =>
-            layer.children ? (
-              <button
-                className="layer layer--interactive"
+          {detailLayers.map((layer) => {
+            const isInteractive = Boolean(layer.children?.length);
+            const className = isInteractive
+              ? "layer layer--interactive"
+              : "layer";
+
+            return (
+              <article
+                className={className}
                 key={layer.name}
-                type="button"
-                onClick={() => handleLayerClick(layer, path)}
+                onClick={
+                  isInteractive
+                    ? () => handleLayerClick(layer, path)
+                    : undefined
+                }
+                onKeyDown={
+                  isInteractive ? handleLayerKeyDown(layer, path) : undefined
+                }
+                role={isInteractive ? "button" : undefined}
+                tabIndex={isInteractive ? 0 : undefined}
               >
                 <h2 className="layer__title">{layer.name}</h2>
                 {layer.description ? (
                   <p className="layer__description">{layer.description}</p>
                 ) : null}
-              </button>
-            ) : (
-              <article className="layer" key={layer.name}>
-                <h2 className="layer__title">{layer.name}</h2>
-                {layer.description ? (
-                  <p className="layer__description">{layer.description}</p>
-                ) : null}
+                {renderChildLinks(layer, path)}
               </article>
-            )
-          )}
+            );
+          })}
         </section>
       ) : (
         <section className="layout" aria-label="Layercake">
           <section className="stack stack--main">
-            {mainLayers.map((layer) =>
-              layer.children ? (
-                <button
-                  className="layer layer--interactive"
+            {mainLayers.map((layer) => {
+              const isInteractive = Boolean(layer.children?.length);
+              const className = isInteractive
+                ? "layer layer--interactive"
+                : "layer";
+
+              return (
+                <article
+                  className={className}
                   key={layer.name}
-                  type="button"
-                  onClick={() => handleLayerClick(layer, [])}
+                  onClick={
+                    isInteractive ? () => handleLayerClick(layer, []) : undefined
+                  }
+                  onKeyDown={
+                    isInteractive ? handleLayerKeyDown(layer, []) : undefined
+                  }
+                  role={isInteractive ? "button" : undefined}
+                  tabIndex={isInteractive ? 0 : undefined}
                 >
                   <h2 className="layer__title">{layer.name}</h2>
                   <p className="layer__description">{layer.description}</p>
-                </button>
-              ) : (
-                <article className="layer" key={layer.name}>
-                  <h2 className="layer__title">{layer.name}</h2>
-                  <p className="layer__description">{layer.description}</p>
+                  {renderChildLinks(layer, [])}
                 </article>
-              )
-            )}
+              );
+            })}
           </section>
           {catalogLayer && (
             <aside className="stack stack--side" aria-label="Catalogs">
-              <button
+              <article
                 className="layer layer--interactive layer--side"
-                type="button"
                 onClick={() => handleLayerClick(catalogLayer, [])}
+                onKeyDown={handleLayerKeyDown(catalogLayer, [])}
+                role="button"
+                tabIndex={0}
               >
                 <h2 className="layer__title">{catalogLayer.name}</h2>
                 <p className="layer__description">{catalogLayer.description}</p>
-              </button>
+                {renderChildLinks(catalogLayer, [])}
+              </article>
             </aside>
           )}
         </section>
