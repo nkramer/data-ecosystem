@@ -109,158 +109,259 @@ analytics_layer_cake:
                 description: A workflow orchestration platform designed to make data pipelines more reliable, observable, and easier to operate in production.
 
   - name: Storage Layer
-    description: Data Storage, File Formats, Table Formats, and Query Engines
+    description: The systems that store analytical data and provide the foundation for querying, including warehouses, object storage, file formats, and table formats.
     children:
-   
+
       - name: Data Storage
-        description: Systems that store analytical data and execute large-scale queries.
+        description: Platforms that persist large volumes of analytical data and provide compute or interfaces for querying it.
         children:
           - name: Cloud Data Warehouses
-            description: Fully managed analytics databases optimized for SQL queries.
+            description: Fully managed databases designed for fast SQL analytics over structured and semi-structured data.
             children:
-              - Snowflake
-              - BigQuery
-              - Amazon Redshift
-              - Azure Synapse
+              - name: Snowflake
+                description: A cloud-native data warehouse that separates storage and compute, enabling elastic scaling and high-performance SQL analytics.
+
+              - name: BigQuery
+                description: Google Cloud’s serverless data warehouse that runs SQL queries over massive datasets without requiring infrastructure management.
+
+              - name: Amazon Redshift
+                description: AWS’s cloud data warehouse optimized for large-scale analytical workloads using SQL.
+
+              - name: Azure Synapse
+                description: Microsoft’s analytics service that combines data warehousing, big data processing, and SQL analytics in a single platform.
+
           - name: Lakehouse Platforms
-            description: Platforms that combine object storage with table formats and compute engines.
+            description: Platforms that combine object storage, open table formats, and SQL or Spark-based compute into a unified analytics system.
             children:
-              - Databricks
-              - Dremio
-              - Starburst
+              - name: Databricks
+                description: A lakehouse platform built on Apache Spark and Delta Lake for data engineering, analytics, and machine learning on object storage.
+
+              - name: Dremio
+                description: A lakehouse query engine and platform optimized for fast SQL queries over data stored in object storage and open table formats.
+
+              - name: Starburst
+                description: An enterprise lakehouse analytics platform built around Trino for querying data across object storage and external systems.
+
           - name: Object Storage
-            description: Low-cost storage for large volumes of analytical data.
+            description: Low-cost, highly scalable storage systems used to hold raw and processed analytical data.
             children:
-              - Amazon S3
-              - Azure Data Lake Storage
-              - Google Cloud Storage
-              - MinIO
+              - name: Amazon S3
+                description: Amazon’s object storage service widely used as the foundation of data lakes and lakehouses.
+
+              - name: Azure Data Lake Storage
+                description: Microsoft’s object storage system optimized for analytics workloads in Azure.
+
+              - name: Google Cloud Storage
+                description: Google’s scalable object storage platform used for data lakes and analytical workloads.
+
+              - name: MinIO
+                description: An open-source, S3-compatible object storage system often used for on-premises or private cloud data lakes.
 
       - name: File Formats
-        description: How data is physically stored on disk for analytical processing.
+        description: The physical representation of data on disk that determines how efficiently it can be read and processed.
         children:
           - name: Columnar Formats
-            description: Optimized for analytics by storing data by column instead of by row.
+            description: File formats that store data by column to enable efficient scanning and compression for analytics.
             children:
-              - Parquet
-              - ORC
+              - name: Parquet
+                description: A widely used open-source columnar file format optimized for analytical queries on large datasets.
+
+              - name: ORC
+                description: A columnar file format designed for high-performance analytics, commonly used in big data systems.
+
           - name: Row-Based Formats
-            description: Formats optimized for data exchange and serialization.
+            description: File formats that store data record by record, typically used for data exchange and streaming.
             children:
-              - Avro
+              - name: Avro
+                description: A row-oriented data serialization format used for data interchange and streaming pipelines.
 
       - name: Table Formats
-        description: Metadata layers that turn files into transactional, queryable tables with schema and history.
+        description: Metadata layers that organize files into transactional tables with schema, versioning, and ACID-like guarantees.
         children:
           - name: Open Table Formats
-            description: Standards for managing tables on object storage with ACID-like behavior.
+            description: Open standards that define how tables are stored and managed on object storage.
             children:
-              - Apache Iceberg
-              - Delta Lake
-              - Apache Hudi
+              - name: Apache Iceberg
+                description: An open table format designed for large analytic tables with schema evolution, partitioning, and time travel.
+
+              - name: Delta Lake
+                description: A table format created by Databricks that adds ACID transactions, schema enforcement, and versioning to data stored in object storage.
+
+              - name: Apache Hudi
+                description: A table format designed for incremental data ingestion and upserts on data lakes, supporting near real-time analytics.
 
   - name: Query and Compute
-    description: Engines that execute SQL and analytical queries over warehouses and data lakes.
+    description: Engines that execute SQL and analytical queries over data stored in warehouses, lakes, and lakehouse platforms.
     children:
       - name: Distributed SQL Engines
-        description: High-performance SQL engines that query data across many nodes.
+        description: Scalable SQL engines designed to query large datasets across clusters of machines, often directly over object storage.
         children:
-          - Trino
-          - Presto
+          - name: Trino
+            description: An open-source distributed SQL query engine optimized for interactive analytics across multiple data sources and object storage.
+
+          - name: Presto
+            description: A high-performance distributed SQL engine originally developed at Facebook for querying large datasets across heterogeneous data systems.
+
       - name: Warehouse and Lakehouse SQL
-        description: SQL engines embedded in data platforms.
+        description: SQL engines that are tightly integrated into managed data warehouse and lakehouse platforms.
         children:
-          - Snowflake
-          - Databricks SQL
-          - BigQuery
-          - Redshift
+          - name: Snowflake
+            description: A fully managed cloud data warehouse that provides elastic compute and SQL analytics over centrally managed data.
+
+          - name: Databricks SQL
+            description: The SQL analytics engine of the Databricks Lakehouse, optimized for querying Delta Lake tables stored on object storage.
+
+          - name: BigQuery
+            description: Google Cloud’s serverless data warehouse that executes SQL queries over large-scale datasets stored in managed and external tables.
+
+          - name: Redshift
+            description: Amazon’s cloud data warehouse designed for running SQL analytics over large structured and semi-structured datasets.
+
       - name: Embedded Analytics Engines
-        description: Lightweight engines for local and application-embedded analytics.
+        description: Lightweight, high-performance databases that can be embedded in applications or used locally to analyze files and small to medium datasets.
         children:
-          - DuckDB
+          - name: DuckDB
+            description: An in-process analytical database designed for fast SQL queries over local files such as Parquet and CSV, commonly used for data science and embedded analytics.
 
   - name: Semantic Layer
-    description: Business-facing definitions of metrics and dimensions that ensure consistency across tools.
+    description: Business-facing definitions of metrics and dimensions that ensure consistent meaning across analytics tools, dashboards, and users.
     children:
       - name: BI Semantic Models
-        description: Metric and dimension definitions embedded in BI platforms.
+        description: Semantic layers built into BI tools that define metrics, dimensions, and relationships for dashboards and reports.
         children:
-          - Looker
-          - Power BI
+          - name: Looker
+            description: A BI platform with a built-in modeling language that defines metrics and dimensions as governed data models for consistent analytics.
+
+          - name: Power BI
+            description: Microsoft’s business intelligence platform that includes a semantic model for defining measures, relationships, and business logic.
+
       - name: Standalone Metrics Layers
-        description: Dedicated systems for defining and serving metrics to multiple tools.
+        description: Dedicated systems that define and serve consistent metrics to multiple analytics and operational tools.
         children:
-          - dbt Semantic Layer
-          - Cube
+          - name: dbt Semantic Layer
+            description: A metrics and semantic framework built on top of dbt models that exposes consistent business metrics to BI tools and applications.
+
+          - name: Cube
+            description: A headless semantic layer that provides a unified metrics API for serving analytics to dashboards, applications, and embedded use cases.
 
   - name: Output
-    description: Business Intelligence (BI) and Dashboards, Exploratory data analysis (EDA), Reverse ETL.
+    description: Tools and platforms that deliver analytics to people, applications, and operational systems, including dashboards, notebooks, and data activation.
     children:
-   
-      - name: Business Intelligence and Dashboards
-        description: Tools used by humans to explore data, create dashboards, and make decisions.
+
+      - name: Business Intelligence
+        description: User-facing tools for visualizing data, answering business questions, and monitoring performance.
         children:
           - name: Business Intelligence Platforms
-            description: Visualization, reporting, and ad-hoc analytics tools.
+            description: Platforms for building dashboards, running ad-hoc queries, and sharing reports.
             children:
-              - Tableau
-              - Power BI
-              - Looker
-              - Qlik
-              - ThoughtSpot
+              - name: Tableau
+                description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting.
+
+              - name: Power BI
+                description: Microsoft’s business intelligence platform for data modeling, dashboards, and enterprise reporting.
+
+              - name: Looker
+                description: A BI platform with a built-in semantic model that provides governed, consistent metrics for dashboards and analysis.
+
+              - name: Qlik
+                description: A data analytics and visualization platform focused on associative, in-memory exploration.
+
+              - name: ThoughtSpot
+                description: A search-driven and AI-powered BI platform designed for self-service analytics.
 
       - name: Reverse ETL
-        description: Tools that sync modeled warehouse data back into operational systems.
+        description: Systems that push curated and modeled data from the warehouse into operational tools.
         children:
           - name: Warehouse-to-SaaS Sync
-            description: Pushes analytics-grade metrics into CRM, marketing, and support tools.
+            description: Platforms that synchronize warehouse tables and metrics into CRM, marketing, and support systems.
             children:
-              - Hightouch
-              - Census
-              - Polytomic
-              - RudderStack
-      - name: Notebooks (EDA)
-        description: Tools for exploratory data analysis 
+              - name: Hightouch
+                description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
+
+              - name: Census
+                description: A reverse ETL platform that maps warehouse data into operational systems for sales, marketing, and growth teams.
+
+              - name: Polytomic
+                description: An enterprise-focused reverse ETL platform for syncing analytics data into business applications.
+
+              - name: RudderStack
+                description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
+
+      - name: Exploratory Data Analysis
+        description: Interactive environments for analysts and data scientists to explore data, build models, and validate hypotheses.
         children:
-          - name: Warehouse-to-SaaS Sync
-            description: Pushes analytics-grade metrics into CRM, marketing, and support tools.
+          - name: Notebook and Analysis Platforms
+            description: Tools that provide interactive coding and data exploration connected to data warehouses and lakes.
             children:
-              - Hightouch
-              - Census
-              - Polytomic
-              - RudderStack
-      - name: Data apps
-        description: Custom applications for end users
+              - name: Jupyter
+                description: An open-source notebook environment for running Python, SQL, and R for data exploration and analysis.
+
+              - name: Databricks Notebooks
+                description: Integrated notebook environment for running SQL and Python directly on the Databricks Lakehouse.
+
+              - name: Hex
+                description: A collaborative data notebook platform designed for analytics, data science, and stakeholder reporting.
+
+              - name: Deepnote
+                description: A cloud-based notebook environment focused on collaboration and data team workflows.
+
+              - name: Google Colab
+                description: A hosted Jupyter notebook service for running Python notebooks in the cloud.
+
+      - name: Data Apps
+        description: Custom-built analytical and data-driven applications delivered to end users.
         children:
-          - name: Databricks apps
-            description: Host Python and Javascript apps in the cloud.
-          - name: Streamlit in Snowflake (SIS)
-            description: Host Python and containers in the cloud
-          - name: Posit Connect
-            description: Host R and Python data apps on-prem.
-          - name: Plotly Dash Enterprise
-            description: Host Python apps on-prem.
-          - name: Replit
-            description: Host Python apps in the cloud.
+          - name: Application Hosting Platforms
+            description: Platforms for deploying and running custom data applications.
+            children:
+              - name: Databricks Apps
+                description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
+
+              - name: Streamlit in Snowflake
+                description: Snowflake’s integrated Streamlit environment for building and hosting Python-based data applications.
+
+              - name: Posit Connect
+                description: An enterprise platform for deploying R and Python data applications on-premises or in private clouds.
+
+              - name: Plotly Dash Enterprise
+                description: A platform for deploying production-grade Python analytical web applications.
+
+              - name: Replit
+                description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
 
   - name: Catalogs
-    description: Systems that track what data exists, who owns it, how it is defined, and where it is used.
+    description: Systems that manage metadata about data assets, including what data exists, how it is defined, who owns it, and how it is used.
     children:
       - name: Enterprise Catalogs
-        description: Centralized platforms for discovery, lineage, and governance.
+        description: Centralized governance platforms that provide data discovery, lineage, policy management, and stewardship across large organizations.
         children:
-          - Collibra
-          - Alation
-          - Informatica
+          - name: Collibra
+            description: An enterprise data governance and catalog platform used to manage data definitions, ownership, lineage, and regulatory compliance.
+
+          - name: Alation
+            description: A data catalog and governance platform that enables data discovery, collaboration, and stewardship across analytics teams.
+
+          - name: Informatica
+            description: An enterprise data management platform that includes data cataloging, lineage, quality, and governance capabilities.
+
       - name: Modern Catalogs
-        description: Cloud-native tools focused on usability and collaboration.
+        description: Cloud-native metadata platforms designed for ease of use, collaboration, and fast discovery in modern analytics stacks.
         children:
-          - Atlan
+          - name: Atlan
+            description: A collaborative data catalog that integrates with modern data tools to provide discovery, lineage, and governance for analytics teams.
+
       - name: Integrated Catalogs
-        description: Metadata systems built into cloud and lakehouse platforms.
+        description: Metadata and governance systems embedded directly into cloud data platforms and lakehouse environments.
         children:
-          - AWS Glue Data Catalog
-          - Microsoft Purview
-          - Google Dataplex
-          - Databricks Unity Catalog
+          - name: AWS Glue Data Catalog
+            description: Amazon’s managed metadata repository for tables, schemas, and partitions used by analytics services on AWS.
+
+          - name: Microsoft Purview
+            description: Microsoft’s data governance and catalog service for discovering, classifying, and managing data across Azure and on-prem systems.
+
+          - name: Google Dataplex
+            description: Google Cloud’s data governance and metadata management service for data lakes and warehouses.
+
+          - name: Databricks Unity Catalog
+            description: A unified governance layer for the Databricks Lakehouse that manages data access, lineage, and metadata across all Databricks workspaces.
 
