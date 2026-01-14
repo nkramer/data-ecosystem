@@ -41,7 +41,7 @@ analytics_layer_cake:
               - name: IoT Devices
                 description: Physical devices and sensors that continuously emit telemetry, measurements, and status updates as event streams for monitoring, analytics, and automation.
 
-      - name: Ingestion and Replication
+      - name: Ingestion
         description: Tools that extract data from operational systems and deliver it into analytics platforms using batch or streaming pipelines.
         children:
           - name: Batch ELT and Replication
@@ -76,33 +76,43 @@ analytics_layer_cake:
 
 
       - name: Transformation and Modeling
-        description: Processes that clean, join, and shape raw data into analytics-ready tables and metrics.
+        description: Processes that clean, join, validate, and structure raw data into analytics-ready tables, metrics, and business entities.
         children:
           - name: SQL-based ELT
-            description: Transformations executed inside the warehouse using SQL and version-controlled models.
+            description: Transformation workflows that run inside the data warehouse using SQL, typically managed as version-controlled models.
             children:
-              - dbt
-          - name: Distributed Processing
-            description: Engines used for large-scale data transformations and enrichment.
-            children:
-              - Apache Spark
-              - Apache Flink
+              - name: dbt
+                description: A transformation and modeling framework that lets data teams define, test, and version SQL-based data models directly inside their data warehouse.
 
-      - name: Orchestration and Workflow
-        description: Systems that schedule and manage data pipelines, dependencies, retries, and SLAs.
+          - name: Distributed Processing
+            description: Compute engines designed to process very large datasets, complex transformations, and streaming data across many machines.
+            children:
+              - name: Apache Spark
+                description: A distributed data processing engine widely used for large-scale batch transformations, machine learning, and complex analytics workloads.
+
+              - name: Apache Flink
+                description: A stream-first distributed processing engine used for real-time data transformation, enrichment, and event-driven analytics.
+
+      - name: Orchestration 
+        description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
         children:
           - name: Workflow Orchestration
-            description: Platforms that coordinate when ingestion and transformation jobs run.
+            description: Platforms that schedule, track, and manage the execution of data ingestion and transformation jobs.
             children:
-              - Airflow
-              - Dagster
-              - Prefect
+              - name: Airflow
+                description: An open-source workflow scheduler that defines data pipelines as directed acyclic graphs and manages their execution across distributed systems.
 
-  - name: Data Storage
+              - name: Dagster
+                description: A modern data orchestrator focused on data assets, observability, and type-aware pipelines for analytics and machine learning workloads.
+
+              - name: Prefect
+                description: A workflow orchestration platform designed to make data pipelines more reliable, observable, and easier to operate in production.
+
+  - name: Storage Layer
     description: Data Storage, File Formats, Table Formats, and Query Engines
     children:
    
-      - name: Storage and Compute Platforms
+      - name: Data Storage
         description: Systems that store analytical data and execute large-scale queries.
         children:
           - name: Cloud Data Warehouses
@@ -236,17 +246,17 @@ analytics_layer_cake:
   - name: Catalogs
     description: Systems that track what data exists, who owns it, how it is defined, and where it is used.
     children:
-      - name: Enterprise Data Catalogs
+      - name: Enterprise Catalogs
         description: Centralized platforms for discovery, lineage, and governance.
         children:
           - Collibra
           - Alation
           - Informatica
-      - name: Modern Data Catalogs
+      - name: Modern Catalogs
         description: Cloud-native tools focused on usability and collaboration.
         children:
           - Atlan
-      - name: Platform-Native Catalogs
+      - name: Integrated Catalogs
         description: Metadata systems built into cloud and lakehouse platforms.
         children:
           - AWS Glue Data Catalog
