@@ -210,7 +210,11 @@ export default function App() {
         {layer.description ? (
           <p className="layer__description">{layer.description}</p>
         ) : null}
-        {renderChildLinks(layer, basePath, "list")}
+        {renderChildLinks(
+          layer,
+          basePath,
+          layer.layout === "stack" ? "list" : "inline"
+        )}
       </article>
     );
   };
