@@ -1,6 +1,7 @@
 analytics_layer_cake:
   - name: Intake
     description: Bringing data into the system
+    layout: stack
     children:
    
       - name: Data Sources
@@ -110,6 +111,7 @@ analytics_layer_cake:
 
   - name: Storage Layer
     description: The systems that store analytical data and provide the foundation for querying, including warehouses, object storage, file formats, and table formats.
+    layout: stack
     children:
 
       - name: Data Storage
@@ -287,7 +289,7 @@ analytics_layer_cake:
             description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
 
       - name: Notebooks
-        description: Coding tools for exploratory data analysis.
+        description: Tools for exploratory data analysis.
         children:
           - name: Jupyter
             description: An open-source notebook environment for running Python, SQL, and R for data exploration and analysis.

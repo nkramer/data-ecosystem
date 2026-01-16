@@ -5,12 +5,14 @@ import layercakeRaw from "../layercake.yaml?raw";
 type RawLayer = {
   name: string;
   description?: string;
+  layout?: "stack";
   children?: Array<RawLayer | string>;
 };
 
 type LayerNode = {
   name: string;
   description: string;
+  layout?: "stack";
   children?: LayerNode[];
 };
 
@@ -30,6 +32,7 @@ const normalizeLayer = (layer: RawLayer | string): LayerNode => {
   return {
     name: layer.name,
     description: layer.description ?? "",
+    layout: layer.layout,
     children: children && children.length > 0 ? children : undefined,
   };
 };
@@ -93,6 +96,7 @@ export default function App() {
   );
   const detailLayers = selectedLayer?.children ?? [];
   const isDetailView = path.length > 0 && selectedLayer !== null;
+  const detailLayout = selectedLayer?.layout ?? "grid";
   const pageTitle = selectedLayer?.name ?? "The Analytics Data Stack";
   const pageDescription = selectedLayer?.description ?? "";
 
@@ -168,6 +172,55 @@ export default function App() {
     window.location.hash = toHash(nextPath);
   };
 
+  const renderLayerCard = (layer: LayerNode, basePath: string[]) => {
+    const isInteractive = Boolean(layer.children?.length);
+    const className = isInteractive
+      ? "layer layer--interactive"
+      : "layer";
+
+    return (
+      <article
+        className={className}
+        key={layer.name}
+        onClick={isInteractive ? () => handleLayerClick(layer, basePath) : undefined}
+        onKeyDown={
+          isInteractive ? handleLayerKeyDown(layer, basePath) : undefined
+        }
+        role={isInteractive ? "button" : undefined}
+        tabIndex={isInteractive ? 0 : undefined}
+      >
+        <h2 className="layer__title">{layer.name}</h2>
+        {layer.description ? (
+          <p className="layer__description">{layer.description}</p>
+        ) : null}
+        {renderChildLinks(layer, basePath, "list")}
+      </article>
+    );
+  };
+
+  const renderDetailLayers = () => {
+    if (detailLayout === "stack") {
+      return (
+        <section className="stack stack--detail" aria-label={pageTitle}>
+          {detailLayers.map((layer) => renderLayerCard(layer, path))}
+        </section>
+      );
+    }
+
+    const count = detailLayers.length;
+    const columns = count <= 3 ? count : count <= 4 ? 2 : 3;
+
+    return (
+      <section
+        className="layer__peer-grid"
+        aria-label={pageTitle}
+        style={{ ["--peer-columns" as string]: columns }}
+      >
+        {detailLayers.map((layer) => renderLayerCard(layer, path))}
+      </section>
+    );
+  };
+
   return (
     <main className="page">
       <header className="page__header">
@@ -182,37 +235,7 @@ export default function App() {
         )}
       </header>
       {isDetailView ? (
-        <section className="stack stack--detail" aria-label={pageTitle}>
-          {detailLayers.map((layer) => {
-            const isInteractive = Boolean(layer.children?.length);
-            const className = isInteractive
-              ? "layer layer--interactive"
-              : "layer";
-
-            return (
-              <article
-                className={className}
-                key={layer.name}
-                onClick={
-                  isInteractive
-                    ? () => handleLayerClick(layer, path)
-                    : undefined
-                }
-                onKeyDown={
-                  isInteractive ? handleLayerKeyDown(layer, path) : undefined
-                }
-                role={isInteractive ? "button" : undefined}
-                tabIndex={isInteractive ? 0 : undefined}
-              >
-                <h2 className="layer__title">{layer.name}</h2>
-                {layer.description ? (
-                  <p className="layer__description">{layer.description}</p>
-                ) : null}
-                {renderChildLinks(layer, path)}
-              </article>
-            );
-          })}
-        </section>
+        renderDetailLayers()
       ) : (
         <section className="layout" aria-label="Layercake">
           <section className="stack stack--main">

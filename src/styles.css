@@ -198,6 +198,13 @@ body {
   outline-offset: 3px;
 }
 
+.layer__peer-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--peer-columns, 3), minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
 .layer--output {
   display: flex;
   flex-direction: column;
