@@ -97,17 +97,14 @@ analytics_layer_cake:
       - name: Orchestration 
         description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
         children:
-          - name: Workflow Orchestration
-            description: Platforms that schedule, track, and manage the execution of data ingestion and transformation jobs.
-            children:
-              - name: Airflow
-                description: An open-source workflow scheduler that defines data pipelines as directed acyclic graphs and manages their execution across distributed systems.
+          - name: Airflow
+            description: An open-source workflow scheduler that defines data pipelines as directed acyclic graphs and manages their execution across distributed systems.
 
-              - name: Dagster
-                description: A modern data orchestrator focused on data assets, observability, and type-aware pipelines for analytics and machine learning workloads.
+          - name: Dagster
+            description: A modern data orchestrator focused on data assets, observability, and type-aware pipelines for analytics and machine learning workloads.
 
-              - name: Prefect
-                description: A workflow orchestration platform designed to make data pipelines more reliable, observable, and easier to operate in production.
+          - name: Prefect
+            description: A workflow orchestration platform designed to make data pipelines more reliable, observable, and easier to operate in production.
 
   - name: Storage Layer
     description: The systems that store analytical data and provide the foundation for querying, including warehouses, object storage, file formats, and table formats.
@@ -117,6 +114,21 @@ analytics_layer_cake:
       - name: Data Storage
         description: Platforms that persist large volumes of analytical data and provide compute or interfaces for querying it.
         children:
+          - name: Object Storage
+            description: Low-cost, scalable storage for binary data.
+            children:
+              - name: Amazon S3
+                description: The de facto standard API for object storage.
+
+              - name: Azure Data Lake Storage
+                description: Microsoft’s object storage.
+
+              - name: Google Cloud Storage
+                description: Google’s version.
+
+              - name: MinIO
+                description: An open-source clone of Amazon S3, often used on-prem.
+
           - name: Cloud Data Warehouses
             description: Fully managed databases designed for fast SQL analytics over structured and semi-structured data.
             children:
@@ -144,53 +156,29 @@ analytics_layer_cake:
               - name: Starburst
                 description: An enterprise lakehouse analytics platform built around Trino for querying data across object storage and external systems.
 
-          - name: Object Storage
-            description: Low-cost, highly scalable storage systems used to hold raw and processed analytical data.
-            children:
-              - name: Amazon S3
-                description: Amazon’s object storage service widely used as the foundation of data lakes and lakehouses.
-
-              - name: Azure Data Lake Storage
-                description: Microsoft’s object storage system optimized for analytics workloads in Azure.
-
-              - name: Google Cloud Storage
-                description: Google’s scalable object storage platform used for data lakes and analytical workloads.
-
-              - name: MinIO
-                description: An open-source, S3-compatible object storage system often used for on-premises or private cloud data lakes.
-
       - name: File Formats
-        description: The physical representation of data on disk that determines how efficiently it can be read and processed.
+        description: How data is stored on disk for efficient access.
         children:
-          - name: Columnar Formats
-            description: File formats that store data by column to enable efficient scanning and compression for analytics.
-            children:
-              - name: Parquet
-                description: A widely used open-source columnar file format optimized for analytical queries on large datasets.
+          - name: Parquet
+            description: A column oriented format, widely used for lake houses.
 
-              - name: ORC
-                description: A columnar file format designed for high-performance analytics, commonly used in big data systems.
+          - name: ORC
+            description: A legacy column oriented format. 
 
-          - name: Row-Based Formats
-            description: File formats that store data record by record, typically used for data exchange and streaming.
-            children:
-              - name: Avro
-                description: A row-oriented data serialization format used for data interchange and streaming pipelines.
+          - name: Avro
+            description: A row-oriented format used for streaming and CDC.
 
       - name: Table Formats
         description: Metadata layers that organize files into transactional tables with schema, versioning, and ACID-like guarantees.
         children:
-          - name: Open Table Formats
-            description: Open standards that define how tables are stored and managed on object storage.
-            children:
-              - name: Apache Iceberg
-                description: An open table format designed for large analytic tables with schema evolution, partitioning, and time travel.
+          - name: Apache Iceberg
+            description: Widely supported, optimized for reads and appends.
 
-              - name: Delta Lake
-                description: A table format created by Databricks that adds ACID transactions, schema enforcement, and versioning to data stored in object storage.
+          - name: Delta Lake
+            description: Databricks native format
 
-              - name: Apache Hudi
-                description: A table format designed for incremental data ingestion and upserts on data lakes, supporting near real-time analytics.
+          - name: Apache Hudi
+            description: Optimized for CDC and upserts.
 
   - name: Query and Compute
     description: Engines that execute SQL and analytical queries over data stored in warehouses, lakes, and lakehouse platforms.
