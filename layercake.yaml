@@ -272,23 +272,26 @@ analytics_layer_cake:
               - name: ThoughtSpot
                 description: A search-driven and AI-powered BI platform designed for self-service analytics.
 
-      - name: Reverse ETL
-        description: Systems that push curated and modeled data from the warehouse into operational tools.
+      - name: Data Apps
+        description: Custom-built analytical and data-driven applications delivered to end users.
         children:
-          - name: Warehouse-to-SaaS Sync
-            description: Platforms that synchronize warehouse tables and metrics into CRM, marketing, and support systems.
+          - name: Application Hosting Platforms
+            description: Platforms for deploying and running custom data applications.
             children:
-              - name: Hightouch
-                description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
+              - name: Databricks Apps
+                description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
 
-              - name: Census
-                description: A reverse ETL platform that maps warehouse data into operational systems for sales, marketing, and growth teams.
+              - name: Streamlit in Snowflake
+                description: Snowflake’s integrated Streamlit environment for building and hosting Python-based data applications.
 
-              - name: Polytomic
-                description: An enterprise-focused reverse ETL platform for syncing analytics data into business applications.
+              - name: Posit Connect
+                description: An enterprise platform for deploying R and Python data applications on-premises or in private clouds.
 
-              - name: RudderStack
-                description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
+              - name: Plotly Dash Enterprise
+                description: A platform for deploying production-grade Python analytical web applications.
+
+              - name: Replit
+                description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
 
       - name: Exploratory Data Analysis
         description: Interactive environments for analysts and data scientists to explore data, build models, and validate hypotheses.
@@ -311,26 +314,23 @@ analytics_layer_cake:
               - name: Google Colab
                 description: A hosted Jupyter notebook service for running Python notebooks in the cloud.
 
-      - name: Data Apps
-        description: Custom-built analytical and data-driven applications delivered to end users.
+      - name: Reverse ETL
+        description: Systems that push curated and modeled data from the warehouse into operational tools.
         children:
-          - name: Application Hosting Platforms
-            description: Platforms for deploying and running custom data applications.
+          - name: Warehouse-to-SaaS Sync
+            description: Platforms that synchronize warehouse tables and metrics into CRM, marketing, and support systems.
             children:
-              - name: Databricks Apps
-                description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
+              - name: Hightouch
+                description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
 
-              - name: Streamlit in Snowflake
-                description: Snowflake’s integrated Streamlit environment for building and hosting Python-based data applications.
+              - name: Census
+                description: A reverse ETL platform that maps warehouse data into operational systems for sales, marketing, and growth teams.
 
-              - name: Posit Connect
-                description: An enterprise platform for deploying R and Python data applications on-premises or in private clouds.
+              - name: Polytomic
+                description: An enterprise-focused reverse ETL platform for syncing analytics data into business applications.
 
-              - name: Plotly Dash Enterprise
-                description: A platform for deploying production-grade Python analytical web applications.
-
-              - name: Replit
-                description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
+              - name: RudderStack
+                description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
 
   - name: Catalogs
     description: Systems that manage metadata about data assets, including what data exists, how it is defined, who owns it, and how it is used.

@@ -198,6 +198,13 @@ body {
   outline-offset: 3px;
 }
 
+.layer--output {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
@@ -216,4 +223,12 @@ body {
   .layer {
     padding: 20px;
   }
+}
+
+
+.layer__output-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
 }

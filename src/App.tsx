@@ -42,9 +42,12 @@ const layers = Array.isArray(parsed?.analytics_layer_cake)
 const catalogLayer = layers.find((layer) =>
   layer.name.toLowerCase().includes("catalogs")
 );
+const outputLayer = layers.find(
+  (layer) => layer.name.toLowerCase() === "output"
+);
 const mainLayers = catalogLayer
-  ? layers.filter((layer) => layer !== catalogLayer)
-  : layers;
+  ? layers.filter((layer) => layer !== catalogLayer && layer !== outputLayer)
+  : layers.filter((layer) => layer !== outputLayer);
 
 const getHashPath = () => {
   const raw = window.location.hash.replace(/^#/, "");
@@ -116,6 +119,7 @@ export default function App() {
     }
 
     const layerPath = [...basePath, layer.name];
+
     const items = layer.children.flatMap((child, index) => {
       const href = `#${toHash([...layerPath, child.name])}`;
       const link = (
@@ -237,6 +241,37 @@ export default function App() {
                 </article>
               );
             })}
+            {outputLayer && (
+              <section className="layer__output-row" aria-label="Output">
+                {outputLayer.children?.map((child) => {
+                  const isInteractive = Boolean(child.children?.length);
+                  const className = isInteractive
+                    ? "layer layer--interactive layer--output"
+                    : "layer layer--output";
+
+                  return (
+                    <article
+                      className={className}
+                      key={`${child.name}-output`}
+                      onClick={
+                        isInteractive
+                          ? () => handleLayerClick(child, [outputLayer.name])
+                          : undefined
+                      }
+                      onKeyDown={
+                        isInteractive
+                          ? handleLayerKeyDown(child, [outputLayer.name])
+                          : undefined
+                      }
+                      role={isInteractive ? "button" : undefined}
+                      tabIndex={isInteractive ? 0 : undefined}
+                    >
+                      <h2 className="layer__title">{child.name}</h2>
+                    </article>
+                  );
+                })}
+              </section>
+            )}
           </section>
           {catalogLayer && (
             <aside className="stack stack--side" aria-label="Catalogs">
