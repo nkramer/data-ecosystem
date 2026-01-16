@@ -72,7 +72,7 @@ body {
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(220px, 28vw, 360px);
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 28vw, 200px);
   align-items: start;
   gap: 16px;
 }
@@ -80,6 +80,7 @@ body {
 .stack {
   display: flex;
   gap: 12px;
+  width: 100%;
 }
 
 .stack--main {
@@ -88,13 +89,14 @@ body {
 }
 
 .stack--side {
-  width: clamp(220px, 28vw, 360px);
+  width: 100%;
   flex-direction: column;
   align-self: stretch;
 }
 
 .stack--detail {
   flex-direction: column-reverse;
+  width: 100%;
 }
 
 .layer {
@@ -109,7 +111,6 @@ body {
 }
 
 .layer--side {
-  width: 200px;
   flex: 1;
   display: flex;
   flex-direction: column;
