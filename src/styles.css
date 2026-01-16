@@ -97,6 +97,8 @@ body {
 .stack--detail {
   flex-direction: column-reverse;
   width: 100%;
+  max-width: calc(100% - clamp(200px, 28vw, 200px) - 16px);
+  margin-right: auto;
 }
 
 .layer {
@@ -203,6 +205,7 @@ body {
   flex-direction: column;
   gap: var(--peer-gap, 16px);
   width: 100%;
+  margin-right: auto;
 }
 
 .layer__peer-row {
@@ -220,6 +223,15 @@ body {
     (100% - (var(--peer-columns, 3) - 1) * var(--peer-gap, 16px)) /
       var(--peer-columns, 3)
   );
+  width: auto;
+}
+
+.layer__peer-rows .layer__children {
+  flex-wrap: wrap;
+}
+
+.layer__peer-rows .layer__child {
+  white-space: normal;
 }
 
 .layer--output {
