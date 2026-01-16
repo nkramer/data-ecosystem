@@ -198,11 +198,28 @@ body {
   outline-offset: 3px;
 }
 
-.layer__peer-grid {
-  display: grid;
-  grid-template-columns: repeat(var(--peer-columns, 3), minmax(0, 1fr));
-  gap: 16px;
+.layer__peer-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--peer-gap, 16px);
   width: 100%;
+}
+
+.layer__peer-row {
+  display: flex;
+  gap: var(--peer-gap, 16px);
+  width: 100%;
+}
+
+.layer__peer-row--centered {
+  justify-content: center;
+}
+
+.layer__peer-row .layer {
+  flex: 0 0 calc(
+    (100% - (var(--peer-columns, 3) - 1) * var(--peer-gap, 16px)) /
+      var(--peer-columns, 3)
+  );
 }
 
 .layer--output {

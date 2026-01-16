@@ -209,14 +209,33 @@ export default function App() {
 
     const count = detailLayers.length;
     const columns = count <= 3 ? count : count <= 4 ? 2 : 3;
+    const firstRowCount = Math.min(columns, count);
+    const rows =
+      count > columns
+        ? [detailLayers.slice(0, firstRowCount), detailLayers.slice(firstRowCount)]
+        : [detailLayers];
 
     return (
       <section
-        className="layer__peer-grid"
+        className="layer__peer-rows"
         aria-label={pageTitle}
-        style={{ ["--peer-columns" as string]: columns }}
+        style={{
+          ["--peer-columns" as string]: columns,
+          ["--peer-gap" as string]: "16px",
+        }}
       >
-        {detailLayers.map((layer) => renderLayerCard(layer, path))}
+        {rows.map((row, index) => {
+          const isShortRow = row.length < columns;
+          const rowClassName = isShortRow
+            ? "layer__peer-row layer__peer-row--centered"
+            : "layer__peer-row";
+
+          return (
+            <div className={rowClassName} key={`peer-row-${index}`}>
+              {row.map((layer) => renderLayerCard(layer, path))}
+            </div>
+          );
+        })}
       </section>
     );
   };
