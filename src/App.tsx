@@ -7,6 +7,13 @@
 // https://www.datagalaxy.com/en/blog/best-data-catalog-features/?utm_source=chatgpt.com
 // https://www.alation.com/blog/modern-data-stack-explained/?utm_source=chatgpt.com
 // https://www.ibm.com/think/topics/modern-data-stack?utm_source=chatgpt.com
+//
+// closest:
+// https://www.tellius.com/resources/blog/modern-data-stack
+// https://www.altexsoft.com/blog/modern-data-stack/
+// https://www.dataiku.com/stories/blog/paying-down-your-analytics-ai-technical-debt
+// https://www.atscale.com/blog/how-to-use-semantic-layer-data-analytics/
+// https://www.hpcwire.com/bigdatawire/2022/05/23/inside-the-modern-data-stack/
 
 import { KeyboardEvent, useEffect, useMemo, useState } from "react";
 import YAML from "yaml";
