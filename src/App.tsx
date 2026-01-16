@@ -269,7 +269,6 @@ export default function App() {
       {child.description ? (
         <p className="layer__description">{child.description}</p>
       ) : null}
-      {renderChildLinks(child, [outputLayer.name], "list")}
 </article>
                   );
                 })}
