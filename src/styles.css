@@ -141,6 +141,8 @@ body {
   gap: 8px;
   font-size: 0.95rem;
   font-style: italic;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
   overflow-x: auto;
   padding-bottom: 2px;
 }
@@ -160,7 +162,8 @@ body {
 }
 
 .layer__child {
-  color: #e6efff;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -173,9 +176,14 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
+  background: #ffffff !important;
   display: inline-block;
   flex: 0 0 auto;
+}
+
+html.darkreader .layer__dot,
+html.darkreader--root .layer__dot {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 .layer--interactive {
