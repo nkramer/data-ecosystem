@@ -1,3 +1,13 @@
+// Some interesting age is about what data stacks look like. 
+// None of these match our diagram here, or even come that close,
+// but they give some inspiration.
+//
+// https://www.qlik.com/us/data-integration/modern-data-stack?utm_source=chatgpt.com
+// https://clickhouse.com/resources/engineering/data-lakehouse?utm_source=chatgpt.com
+// https://www.datagalaxy.com/en/blog/best-data-catalog-features/?utm_source=chatgpt.com
+// https://www.alation.com/blog/modern-data-stack-explained/?utm_source=chatgpt.com
+// https://www.ibm.com/think/topics/modern-data-stack?utm_source=chatgpt.com
+
 import { KeyboardEvent, useEffect, useMemo, useState } from "react";
 import YAML from "yaml";
 import layercakeRaw from "../layercake.yaml?raw";
