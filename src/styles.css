@@ -173,17 +173,14 @@ body {
 }
 
 .layer__dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ffffff !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
   display: inline-block;
   flex: 0 0 auto;
-}
-
-html.darkreader .layer__dot,
-html.darkreader--root .layer__dot {
-  filter: invert(1) hue-rotate(180deg);
+  font-size: 0.85rem;
+  line-height: 1;
+  width: 0.85rem;
+  text-align: center;
 }
 
 .layer--interactive {

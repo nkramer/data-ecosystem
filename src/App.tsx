@@ -132,7 +132,7 @@ export default function App() {
       if (variant === "list") {
         return [
           <div className="layer__child-row" key={`${child.name}-row`}>
-            <span className="layer__dot" aria-hidden="true" />
+            <span className="layer__dot" aria-hidden="true">●</span>
             {link}
           </div>,
         ];
@@ -145,7 +145,7 @@ export default function App() {
 
       return [
         link,
-        <span className="layer__dot" aria-hidden="true" key={`${child.name}-dot`} />,
+        <span className="layer__dot" aria-hidden="true" key={`${child.name}-dot`}>●</span>,
       ];
     });
 
