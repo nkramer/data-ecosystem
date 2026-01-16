@@ -251,7 +251,7 @@ analytics_layer_cake:
     description: Tools and platforms that deliver analytics to people, applications, and operational systems, including dashboards, notebooks, and data activation.
     children:
       - name: Business Intelligence
-        description: User-facing tools for visualizing data, answering business questions, and monitoring performance.
+        description: Dashboards and visualizations.
         children:
           - name: Tableau
             description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting.
@@ -269,7 +269,7 @@ analytics_layer_cake:
             description: A search-driven and AI-powered BI platform designed for self-service analytics.
 
       - name: Data Apps
-        description: Custom-built analytical and data-driven applications delivered to end users.
+        description: Custom apps for end users.
         children:
           - name: Databricks Apps
             description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
@@ -286,8 +286,8 @@ analytics_layer_cake:
           - name: Replit
             description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
 
-      - name: Exploratory Data Analysis
-        description: Interactive environments for analysts and data scientists to explore data, build models, and validate hypotheses.
+      - name: Notebooks
+        description: Coding tools for exploratory data analysis.
         children:
           - name: Jupyter
             description: An open-source notebook environment for running Python, SQL, and R for data exploration and analysis.
@@ -305,7 +305,7 @@ analytics_layer_cake:
             description: A hosted Jupyter notebook service for running Python notebooks in the cloud.
 
       - name: Reverse ETL
-        description: Systems that push curated and modeled data from the warehouse into operational tools.
+        description: Pushing data back into operational tools.
         children:
           - name: Hightouch
             description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
