@@ -217,6 +217,9 @@ analytics_layer_cake:
           - name: Redshift
             description: Amazon’s cloud data warehouse designed for running SQL analytics over large structured and semi-structured datasets.
 
+          - name: ClickHouse
+            description: A vertically integrated analytical database that ingests, stores, and queries data using its own columnar storage and vectorized SQL engine, designed for low-latency analytics on large volumes of event and log data.
+
       - name: Embedded Analytics Engines
         description: Lightweight, high-performance databases that can be embedded in applications or used locally to analyze files and small to medium datasets.
         children:
