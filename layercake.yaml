@@ -250,87 +250,74 @@ analytics_layer_cake:
   - name: Output
     description: Tools and platforms that deliver analytics to people, applications, and operational systems, including dashboards, notebooks, and data activation.
     children:
-
       - name: Business Intelligence
         description: User-facing tools for visualizing data, answering business questions, and monitoring performance.
         children:
-          - name: Business Intelligence Platforms
-            description: Platforms for building dashboards, running ad-hoc queries, and sharing reports.
-            children:
-              - name: Tableau
-                description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting.
+          - name: Tableau
+            description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting.
 
-              - name: Power BI
-                description: Microsoft’s business intelligence platform for data modeling, dashboards, and enterprise reporting.
+          - name: Power BI
+            description: Microsoft’s business intelligence platform for data modeling, dashboards, and enterprise reporting.
 
-              - name: Looker
-                description: A BI platform with a built-in semantic model that provides governed, consistent metrics for dashboards and analysis.
+          - name: Looker
+            description: A BI platform with a built-in semantic model that provides governed, consistent metrics for dashboards and analysis.
 
-              - name: Qlik
-                description: A data analytics and visualization platform focused on associative, in-memory exploration.
+          - name: Qlik
+            description: A data analytics and visualization platform focused on associative, in-memory exploration.
 
-              - name: ThoughtSpot
-                description: A search-driven and AI-powered BI platform designed for self-service analytics.
+          - name: ThoughtSpot
+            description: A search-driven and AI-powered BI platform designed for self-service analytics.
 
       - name: Data Apps
         description: Custom-built analytical and data-driven applications delivered to end users.
         children:
-          - name: Application Hosting Platforms
-            description: Platforms for deploying and running custom data applications.
-            children:
-              - name: Databricks Apps
-                description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
+          - name: Databricks Apps
+            description: A platform for hosting Python and JavaScript data applications directly on the Databricks Lakehouse.
 
-              - name: Streamlit in Snowflake
-                description: Snowflake’s integrated Streamlit environment for building and hosting Python-based data applications.
+          - name: Streamlit in Snowflake
+            description: Snowflake’s integrated Streamlit environment for building and hosting Python-based data applications.
 
-              - name: Posit Connect
-                description: An enterprise platform for deploying R and Python data applications on-premises or in private clouds.
+          - name: Posit Connect
+            description: An enterprise platform for deploying R and Python data applications on-premises or in private clouds.
 
-              - name: Plotly Dash Enterprise
-                description: A platform for deploying production-grade Python analytical web applications.
+          - name: Plotly Dash Enterprise
+            description: A platform for deploying production-grade Python analytical web applications.
 
-              - name: Replit
-                description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
+          - name: Replit
+            description: A cloud-based development and hosting environment for building and running Python and JavaScript data applications.
 
       - name: Exploratory Data Analysis
         description: Interactive environments for analysts and data scientists to explore data, build models, and validate hypotheses.
         children:
-          - name: Notebook and Analysis Platforms
-            description: Tools that provide interactive coding and data exploration connected to data warehouses and lakes.
-            children:
-              - name: Jupyter
-                description: An open-source notebook environment for running Python, SQL, and R for data exploration and analysis.
+          - name: Jupyter
+            description: An open-source notebook environment for running Python, SQL, and R for data exploration and analysis.
 
-              - name: Databricks Notebooks
-                description: Integrated notebook environment for running SQL and Python directly on the Databricks Lakehouse.
+          - name: Databricks Notebooks
+            description: Integrated notebook environment for running SQL and Python directly on the Databricks Lakehouse.
 
-              - name: Hex
-                description: A collaborative data notebook platform designed for analytics, data science, and stakeholder reporting.
+          - name: Hex
+            description: A collaborative data notebook platform designed for analytics, data science, and stakeholder reporting.
 
-              - name: Deepnote
-                description: A cloud-based notebook environment focused on collaboration and data team workflows.
+          - name: Deepnote
+            description: A cloud-based notebook environment focused on collaboration and data team workflows.
 
-              - name: Google Colab
-                description: A hosted Jupyter notebook service for running Python notebooks in the cloud.
+          - name: Google Colab
+            description: A hosted Jupyter notebook service for running Python notebooks in the cloud.
 
       - name: Reverse ETL
         description: Systems that push curated and modeled data from the warehouse into operational tools.
         children:
-          - name: Warehouse-to-SaaS Sync
-            description: Platforms that synchronize warehouse tables and metrics into CRM, marketing, and support systems.
-            children:
-              - name: Hightouch
-                description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
+          - name: Hightouch
+            description: A reverse ETL platform that syncs data from warehouses into SaaS tools such as Salesforce, HubSpot, and Braze.
 
-              - name: Census
-                description: A reverse ETL platform that maps warehouse data into operational systems for sales, marketing, and growth teams.
+          - name: Census
+            description: A reverse ETL platform that maps warehouse data into operational systems for sales, marketing, and growth teams.
 
-              - name: Polytomic
-                description: An enterprise-focused reverse ETL platform for syncing analytics data into business applications.
+          - name: Polytomic
+            description: An enterprise-focused reverse ETL platform for syncing analytics data into business applications.
 
-              - name: RudderStack
-                description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
+          - name: RudderStack
+            description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
 
   - name: Catalogs
     description: Systems that manage metadata about data assets, including what data exists, how it is defined, who owns it, and how it is used.

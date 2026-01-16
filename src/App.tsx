@@ -265,9 +265,12 @@ export default function App() {
                       }
                       role={isInteractive ? "button" : undefined}
                       tabIndex={isInteractive ? 0 : undefined}
-                    >
-                      <h2 className="layer__title">{child.name}</h2>
-                    </article>
+                    >      <h2 className="layer__title">{child.name}</h2>
+      {child.description ? (
+        <p className="layer__description">{child.description}</p>
+      ) : null}
+      {renderChildLinks(child, [outputLayer.name])}
+</article>
                   );
                 })}
               </section>
