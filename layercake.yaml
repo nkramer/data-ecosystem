@@ -25,10 +25,17 @@ analytics_layer_cake:
           - name: SaaS Applications
             description: Cloud software systems that hold business data such as customers, billing, and support.
             children:
-              - Salesforce
-              - Stripe
-              - Zendesk
-              - HubSpot
+              - name: Salesforce
+                description: A cloud-based CRM platform that manages customer accounts, sales pipelines, support interactions, and related business data used for revenue and customer analytics.
+
+              - name: Stripe
+                description: A payments and billing platform that processes online transactions and emits detailed financial, customer, and event data for revenue, usage, and fraud analytics.
+
+              - name: Zendesk
+                description: A customer support platform that captures tickets, conversations, and resolution metadata used for support operations and customer experience analytics.
+
+              - name: HubSpot
+                description: A marketing, sales, and CRM platform that tracks leads, campaigns, customer interactions, and funnel metrics for growth and lifecycle analytics.
 
           - name: Event and Log Sources
             description: Systems that generate high-volume streams of behavioral events and technical logs from applications, devices, and infrastructure.
@@ -49,13 +56,13 @@ analytics_layer_cake:
             description: Systems that periodically copy data from source databases and SaaS applications into warehouses or data lakes, usually loading raw data and transforming it later.
             children:
               - name: Fivetran
-                description: A fully managed ELT service that automatically replicates data from SaaS applications and databases into data warehouses with minimal configuration.
+                description: A fully managed ELT service focused on reliable, low-ops replication of databases and SaaS sources into analytics systems.
 
               - name: Airbyte
-                description: An open-source and cloud-based data integration platform for building and running connectors to move data from many sources into analytics systems.
+                description: An open and extensible ELT platform that prioritizes flexibility and custom connectors, with options for self-hosting or managed deployment.
 
               - name: Stitch
-                description: A lightweight cloud ETL service designed to replicate data from SaaS applications and databases into cloud data warehouses.
+                description: A lightweight, SaaS-based ELT tool optimized for fast setup and simple data replication for small to mid-sized teams.
 
           - name: Streaming Ingestion
             description: Platforms that ingest and distribute continuous streams of events and messages in near real time.
@@ -64,7 +71,7 @@ analytics_layer_cake:
                 description: The gold standard. An OSS distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
 
               - name: Confluent
-                description: A commercial Kafka as a service.
+                description: Kafka as a service.
 
               - name: Apache Pulsar
                 description: An open source alternative to Kafka with better replication and less mindshare
@@ -74,6 +81,8 @@ analytics_layer_cake:
             children:
               - name: Debezium
                 description: An open-source change data capture platform that streams database changes from systems like Postgres and MySQL into Kafka and other downstream consumers.
+              - name: Neon
+                description: Databricks' serverless, Postgres-compatible operational database; often paired with WAL-based CDC to stream row-level changes into analytics and AI systems. 
 
 
       - name: Transformation and Modeling
@@ -97,7 +106,7 @@ analytics_layer_cake:
         description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
         children:
           - name: Airflow
-            description: A Scheduler-first solution
+            description: A scheduler-first solution
 
           - name: Dagster
             description: Data-asset–centric and type-aware pipelines
