@@ -61,7 +61,7 @@ analytics_layer_cake:
             description: Platforms that ingest and distribute continuous streams of events and messages in near real time.
             children:
               - name: Apache Kafka
-                description: The gold standard. An open-source distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
+                description: The gold standard. An OSS distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
 
               - name: Confluent
                 description: A commercial Kafka as a service.
@@ -77,34 +77,33 @@ analytics_layer_cake:
 
 
       - name: Transformation and Modeling
-        description: Processes that clean, join, validate, and structure raw data into analytics-ready tables, metrics, and business entities.
+        description: Processes that clean, join, validate, and shape raw data into analytics-ready tables.
         children:
           - name: SQL-based ELT
-            description: Transformation workflows that run inside the data warehouse using SQL, typically managed as version-controlled models.
+            description: Extract-load-transform workflows that transform data inside the warehouse/lakehouse.
             children:
               - name: dbt
-                description: A transformation and modeling framework that lets data teams define, test, and version SQL-based data models directly inside their data warehouse.
+                description: ELT framework for building, testing, versioning, and orchestrating analytics model.
 
           - name: Distributed Processing
-            description: Compute engines designed to process very large datasets, complex transformations, and streaming data across many machines.
+            description: Engines for large-scale batch and streaming transformations that require distributed compute.
             children:
               - name: Apache Spark
-                description: A distributed data processing engine widely used for large-scale batch transformations, machine learning, and complex analytics workloads.
-
+                description: Optimized for throughput over latency, typically used for batch and high latency streaming (>10 seconds).
               - name: Apache Flink
-                description: A stream-first distributed processing engine used for real-time data transformation, enrichment, and event-driven analytics.
+                description: Optimized for latency over throughput, typically used for low latency streaming.
 
       - name: Orchestration 
         description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
         children:
           - name: Airflow
-            description: An open-source workflow scheduler that defines data pipelines as directed acyclic graphs and manages their execution across distributed systems.
+            description: A Scheduler-first solution
 
           - name: Dagster
-            description: A modern data orchestrator focused on data assets, observability, and type-aware pipelines for analytics and machine learning workloads.
+            description: Data-asset–centric and type-aware pipelines
 
           - name: Prefect
-            description: A workflow orchestration platform designed to make data pipelines more reliable, observable, and easier to operate in production.
+            description: Developer-first and Python-oriented
 
   - name: Storage Layer
     description: The systems that store analytical data and provide the foundation for querying, including warehouses, object storage, file formats, and table formats.
@@ -310,38 +309,38 @@ analytics_layer_cake:
             description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
 
   - name: Catalogs
-    description: Systems that manage metadata about data assets, including what data exists, how it is defined, who owns it, and how it is used.
+    description: Catalogs are about discovery, access control, lineage, and governance.
     children:
       - name: Enterprise Catalogs
-        description: Centralized governance platforms that provide data discovery, lineage, policy management, and stewardship across large organizations.
+        description: Optimized for governance and control.
         children:
           - name: Collibra
-            description: An enterprise data governance and catalog platform used to manage data definitions, ownership, lineage, and regulatory compliance.
+            description: Governance, policy, and stewardship first.
 
           - name: Alation
-            description: A data catalog and governance platform that enables data discovery, collaboration, and stewardship across analytics teams.
+            description: Analytics discovery with enterprise guardrails.
 
           - name: Informatica
-            description: An enterprise data management platform that includes data cataloging, lineage, quality, and governance capabilities.
+            description: End-to-end data management suite.
 
       - name: Modern Catalogs
-        description: Cloud-native metadata platforms designed for ease of use, collaboration, and fast discovery in modern analytics stacks.
+        description: Optimized for discovery and inferred metadata from usage.
         children:
           - name: Atlan
-            description: A collaborative data catalog that integrates with modern data tools to provide discovery, lineage, and governance for analytics teams.
+            description: Collaboration over governance.
 
       - name: Integrated Catalogs
-        description: Metadata and governance systems embedded directly into cloud data platforms and lakehouse environments.
+        description: Optimized for governance and access enforcement within one platform.
         children:
-          - name: AWS Glue Data Catalog
-            description: Amazon’s managed metadata repository for tables, schemas, and partitions used by analytics services on AWS.
+          - name: AWS Glue
+            description: A lightweight table and schema registry.
 
           - name: Microsoft Purview
-            description: Microsoft’s data governance and catalog service for discovering, classifying, and managing data across Azure and on-prem systems.
+            description: Enterprise governance and compliance.
 
           - name: Google Dataplex
-            description: Google Cloud’s data governance and metadata management service for data lakes and warehouses.
+            description: Governance for GCS and BigQuery.
 
           - name: Databricks Unity Catalog
-            description: A unified governance layer for the Databricks Lakehouse that manages data access, lineage, and metadata across all Databricks workspaces.
+            description: Access control and lineage for all Databricks workloads.
 
