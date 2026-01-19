@@ -97,6 +97,8 @@ body {
 .stack--detail {
   flex-direction: column-reverse;
   width: 100%;
+  max-width: calc(100% - clamp(200px, 28vw, 200px) - 16px);
+  margin-right: auto;
 }
 
 .layer {
@@ -118,8 +120,8 @@ body {
 }
 
 .layer__title {
-  font-size: 30px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 700;
   letter-spacing: 0.01em;
   margin-bottom: 8px;
   margin-top: -8px;
@@ -127,7 +129,7 @@ body {
 
 .layer__description {
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.2;
   opacity: 0.9;
   text-align: center;
 }
@@ -151,7 +153,7 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 6px;
+  gap: 2px;
   overflow: visible;
 }
 
@@ -198,6 +200,49 @@ body {
   outline-offset: 3px;
 }
 
+.layer__peer-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--peer-gap, 16px);
+  width: 100%;
+  margin-right: auto;
+}
+
+.layer__peer-row {
+  display: flex;
+  gap: var(--peer-gap, 16px);
+  width: 100%;
+}
+
+.layer__peer-row--centered {
+  justify-content: center;
+}
+
+.layer__peer-row .layer {
+  flex: 0 0 calc(
+    (100% - (var(--peer-columns, 3) - 1) * var(--peer-gap, 16px)) /
+      var(--peer-columns, 3)
+  );
+  width: auto;
+}
+
+.layer__peer-rows .layer__children {
+  flex-wrap: wrap;
+}
+
+.layer__peer-rows .layer__child {
+  white-space: normal;
+}
+
+.layer--output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 140px;
+}
+
 @media (max-width: 900px) {
   .layout {
     grid-template-columns: minmax(0, 1fr);
@@ -216,4 +261,12 @@ body {
   .layer {
     padding: 20px;
   }
+}
+
+
+.layer__output-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
 }

@@ -1,3 +1,20 @@
+// Some interesting age is about what data stacks look like. 
+// None of these match our diagram here, or even come that close,
+// but they give some inspiration.
+//
+// https://www.qlik.com/us/data-integration/modern-data-stack?utm_source=chatgpt.com
+// https://clickhouse.com/resources/engineering/data-lakehouse?utm_source=chatgpt.com
+// https://www.datagalaxy.com/en/blog/best-data-catalog-features/?utm_source=chatgpt.com
+// https://www.alation.com/blog/modern-data-stack-explained/?utm_source=chatgpt.com
+// https://www.ibm.com/think/topics/modern-data-stack?utm_source=chatgpt.com
+//
+// closest:
+// https://www.tellius.com/resources/blog/modern-data-stack
+// https://www.altexsoft.com/blog/modern-data-stack/
+// https://www.dataiku.com/stories/blog/paying-down-your-analytics-ai-technical-debt
+// https://www.atscale.com/blog/how-to-use-semantic-layer-data-analytics/
+// https://www.hpcwire.com/bigdatawire/2022/05/23/inside-the-modern-data-stack/
+
 import { KeyboardEvent, useEffect, useMemo, useState } from "react";
 import YAML from "yaml";
 import layercakeRaw from "../layercake.yaml?raw";
@@ -5,12 +22,14 @@ import layercakeRaw from "../layercake.yaml?raw";
 type RawLayer = {
   name: string;
   description?: string;
+  layout?: "stack";
   children?: Array<RawLayer | string>;
 };
 
 type LayerNode = {
   name: string;
   description: string;
+  layout?: "stack";
   children?: LayerNode[];
 };
 
@@ -30,6 +49,7 @@ const normalizeLayer = (layer: RawLayer | string): LayerNode => {
   return {
     name: layer.name,
     description: layer.description ?? "",
+    layout: layer.layout,
     children: children && children.length > 0 ? children : undefined,
   };
 };
@@ -42,9 +62,12 @@ const layers = Array.isArray(parsed?.analytics_layer_cake)
 const catalogLayer = layers.find((layer) =>
   layer.name.toLowerCase().includes("catalogs")
 );
+const outputLayer = layers.find(
+  (layer) => layer.name.toLowerCase() === "output"
+);
 const mainLayers = catalogLayer
-  ? layers.filter((layer) => layer !== catalogLayer)
-  : layers;
+  ? layers.filter((layer) => layer !== catalogLayer && layer !== outputLayer)
+  : layers.filter((layer) => layer !== outputLayer);
 
 const getHashPath = () => {
   const raw = window.location.hash.replace(/^#/, "");
@@ -90,6 +113,7 @@ export default function App() {
   );
   const detailLayers = selectedLayer?.children ?? [];
   const isDetailView = path.length > 0 && selectedLayer !== null;
+  const detailLayout = selectedLayer?.layout ?? "grid";
   const pageTitle = selectedLayer?.name ?? "The Analytics Data Stack";
   const pageDescription = selectedLayer?.description ?? "";
 
@@ -116,6 +140,7 @@ export default function App() {
     }
 
     const layerPath = [...basePath, layer.name];
+
     const items = layer.children.flatMap((child, index) => {
       const href = `#${toHash([...layerPath, child.name])}`;
       const link = (
@@ -164,6 +189,78 @@ export default function App() {
     window.location.hash = toHash(nextPath);
   };
 
+  const renderLayerCard = (layer: LayerNode, basePath: string[]) => {
+    const isInteractive = Boolean(layer.children?.length);
+    const className = isInteractive
+      ? "layer layer--interactive"
+      : "layer";
+
+    return (
+      <article
+        className={className}
+        key={layer.name}
+        onClick={isInteractive ? () => handleLayerClick(layer, basePath) : undefined}
+        onKeyDown={
+          isInteractive ? handleLayerKeyDown(layer, basePath) : undefined
+        }
+        role={isInteractive ? "button" : undefined}
+        tabIndex={isInteractive ? 0 : undefined}
+      >
+        <h2 className="layer__title">{layer.name}</h2>
+        {layer.description ? (
+          <p className="layer__description">{layer.description}</p>
+        ) : null}
+        {renderChildLinks(
+          layer,
+          basePath,
+          layer.layout === "stack" ? "list" : "inline"
+        )}
+      </article>
+    );
+  };
+
+  const renderDetailLayers = () => {
+    if (detailLayout === "stack") {
+      return (
+        <section className="stack stack--detail" aria-label={pageTitle}>
+          {detailLayers.map((layer) => renderLayerCard(layer, path))}
+        </section>
+      );
+    }
+
+    const count = detailLayers.length;
+    const columns = count <= 3 ? count : count <= 4 ? 2 : 3;
+    const firstRowCount = Math.min(columns, count);
+    const rows =
+      count > columns
+        ? [detailLayers.slice(0, firstRowCount), detailLayers.slice(firstRowCount)]
+        : [detailLayers];
+
+    return (
+      <section
+        className="layer__peer-rows"
+        aria-label={pageTitle}
+        style={{
+          ["--peer-columns" as string]: columns,
+          ["--peer-gap" as string]: "16px",
+        }}
+      >
+        {rows.map((row, index) => {
+          const isShortRow = row.length < columns;
+          const rowClassName = isShortRow
+            ? "layer__peer-row layer__peer-row--centered"
+            : "layer__peer-row";
+
+          return (
+            <div className={rowClassName} key={`peer-row-${index}`}>
+              {row.map((layer) => renderLayerCard(layer, path))}
+            </div>
+          );
+        })}
+      </section>
+    );
+  };
+
   return (
     <main className="page">
       <header className="page__header">
@@ -178,37 +275,7 @@ export default function App() {
         )}
       </header>
       {isDetailView ? (
-        <section className="stack stack--detail" aria-label={pageTitle}>
-          {detailLayers.map((layer) => {
-            const isInteractive = Boolean(layer.children?.length);
-            const className = isInteractive
-              ? "layer layer--interactive"
-              : "layer";
-
-            return (
-              <article
-                className={className}
-                key={layer.name}
-                onClick={
-                  isInteractive
-                    ? () => handleLayerClick(layer, path)
-                    : undefined
-                }
-                onKeyDown={
-                  isInteractive ? handleLayerKeyDown(layer, path) : undefined
-                }
-                role={isInteractive ? "button" : undefined}
-                tabIndex={isInteractive ? 0 : undefined}
-              >
-                <h2 className="layer__title">{layer.name}</h2>
-                {layer.description ? (
-                  <p className="layer__description">{layer.description}</p>
-                ) : null}
-                {renderChildLinks(layer, path)}
-              </article>
-            );
-          })}
-        </section>
+        renderDetailLayers()
       ) : (
         <section className="layout" aria-label="Layercake">
           <section className="stack stack--main">
@@ -237,6 +304,39 @@ export default function App() {
                 </article>
               );
             })}
+            {outputLayer && (
+              <section className="layer__output-row" aria-label="Output">
+                {outputLayer.children?.map((child) => {
+                  const isInteractive = Boolean(child.children?.length);
+                  const className = isInteractive
+                    ? "layer layer--interactive layer--output"
+                    : "layer layer--output";
+
+                  return (
+                    <article
+                      className={className}
+                      key={`${child.name}-output`}
+                      onClick={
+                        isInteractive
+                          ? () => handleLayerClick(child, [outputLayer.name])
+                          : undefined
+                      }
+                      onKeyDown={
+                        isInteractive
+                          ? handleLayerKeyDown(child, [outputLayer.name])
+                          : undefined
+                      }
+                      role={isInteractive ? "button" : undefined}
+                      tabIndex={isInteractive ? 0 : undefined}
+                    >      <h2 className="layer__title">{child.name}</h2>
+      {child.description ? (
+        <p className="layer__description">{child.description}</p>
+      ) : null}
+</article>
+                  );
+                })}
+              </section>
+            )}
           </section>
           {catalogLayer && (
             <aside className="stack stack--side" aria-label="Catalogs">
