@@ -301,6 +301,10 @@ analytics_layer_cake:
               - name: Power BI
                 description: Microsoft’s business intelligence platform that includes a semantic model for defining measures, relationships, and business logic.
 
+              - name: ThoughtSpot 
+                description: Optimized for search-driven analytics.
+
+
           - name: Standalone Metrics Layers
             description: Dedicated systems that define and serve consistent metrics to multiple analytics and operational tools.
             children:
@@ -309,6 +313,10 @@ analytics_layer_cake:
 
               - name: Cube
                 description: A headless semantic layer that provides a unified metrics API for serving analytics to dashboards, applications, and embedded use cases.
+
+              - name: AtScale
+                description: A BI acceleration engine that exposes a semantic model.
+
 
   - name: Catalogs
     description: Providing discovery, access control, lineage, and governance.
