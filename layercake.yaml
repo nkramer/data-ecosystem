@@ -1,6 +1,6 @@
 analytics_layer_cake:
   - name: Data Sources
-    description: Systems that generate raw data.
+    description: Generating raw data.
     children:
       - name: Operational Databases
         description: Databases that power live applications and store transactional data used to run the business in real time.
@@ -45,7 +45,7 @@ analytics_layer_cake:
             description: Physical devices and sensors that continuously emit telemetry, measurements, and status updates as event streams for monitoring, analytics, and automation.
 
   - name: Ingestion
-    description: Tools that extract data from data sources and load it into the data stack.
+    description: Extracting data from data sources and loading it into the data stack.
     children:
       - name: Batch ELT and Replication
         description: Systems that periodically copy data from source databases and SaaS applications into warehouses or data lakes, usually loading raw data and transforming it later.
@@ -155,7 +155,7 @@ analytics_layer_cake:
             description: Optimized for CDC and upserts.
 
   - name: Transformation 
-    description: Processes that clean, join, validate, and shape raw data into analytics-ready tables.
+    description: Cleaning, joining, validating, and shaping raw data into analytics-ready tables.
     children:
       - name: Distributed Processing
         description: Engines for large-scale batch and streaming transformations that require distributed compute.
@@ -181,7 +181,7 @@ analytics_layer_cake:
             description: Developer-first and Python-oriented
 
   - name: Query and Compute
-    description: Engines that execute SQL queries over data stored in warehouses, lakes, and lakehouse platforms.
+    description: Executing SQL queries over data stored in warehouses, lakes, and lakehouse platforms.
     children:
       - name: Distributed SQL Engines
         description: Scalable SQL engines designed to query large datasets across clusters of machines, often directly over object storage.
@@ -218,19 +218,19 @@ analytics_layer_cake:
 
 
   - name: Analytics
-    description: Tools that deliver analytics to people and operational systems.
+    description: Delivering analytics to people and operational systems.
     children:
       - name: Business Intelligence 
         description: Dashboards and visualizations.
         children:
-          - name: Tableau
-            description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting.
-
           - name: Power BI
             description: Microsoft’s business intelligence platform for data modeling, dashboards, and enterprise reporting.
 
+          - name: Tableau
+            description: A widely used BI platform for interactive dashboards, visual analytics, and business reporting. Owned by Salesforce.
+
           - name: Looker
-            description: A BI platform with a built-in semantic model that provides governed, consistent metrics for dashboards and analysis.
+            description: A BI platform with a built-in semantic model that provides governed, consistent metrics for dashboards and analysis. Owned by Google.
 
           - name: Qlik
             description: A data analytics and visualization platform focused on associative, in-memory exploration.
@@ -311,7 +311,7 @@ analytics_layer_cake:
                 description: A headless semantic layer that provides a unified metrics API for serving analytics to dashboards, applications, and embedded use cases.
 
   - name: Catalogs
-    description: Catalogs are about discovery, access control, lineage, and governance.
+    description: Providing discovery, access control, lineage, and governance.
     children:
       - name: Enterprise Catalogs
         description: Optimized for governance and control.
