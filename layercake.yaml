@@ -1,121 +1,87 @@
 analytics_layer_cake:
-  - name: Intake
-    description: Bringing data into the system
-    layout: stack
+  - name: Data Sources
+    description: Systems that generate raw data.
     children:
-   
-      - name: Data Sources
-        description: Systems that generate raw data such as application events, transactions, logs, and SaaS records.
+      - name: Operational Databases
+        description: Databases that power live applications and store transactional data used to run the business in real time.
         children:
-          - name: Operational Databases
-            description: Databases that power live applications and store transactional data used to run the business in real time.
-            children:
-              - name: Postgres
-                description: An open-source relational database widely used for transactional workloads, application backends, and as a primary system of record for structured data.
+          - name: Postgres
+            description: An open-source relational database widely used for transactional workloads, application backends, and as a primary system of record for structured data.
 
-              - name: MySQL
-                description: A popular open-source relational database optimized for web applications and high-volume transactional systems.
+          - name: MySQL
+            description: A popular open-source relational database optimized for web applications and high-volume transactional systems.
 
-              - name: SQL Server
-                description: Microsoft’s enterprise relational database used for mission-critical business applications, reporting systems, and transactional workloads.
+          - name: SQL Server
+            description: Microsoft’s enterprise relational database used for mission-critical business applications, reporting systems, and transactional workloads.
 
-              - name: Oracle
-                description: A high-performance enterprise relational database commonly used for large-scale, mission-critical transactional systems in regulated and complex environments.
+          - name: Oracle
+            description: A high-performance enterprise relational database commonly used for large-scale, mission-critical transactional systems in regulated and complex environments.
 
-          - name: SaaS Applications
-            description: Cloud software systems that hold business data such as customers, billing, and support.
-            children:
-              - name: Salesforce
-                description: A cloud-based CRM platform that manages customer accounts, sales pipelines, support interactions, and related business data used for revenue and customer analytics.
-
-              - name: Stripe
-                description: A payments and billing platform that processes online transactions and emits detailed financial, customer, and event data for revenue, usage, and fraud analytics.
-
-              - name: Zendesk
-                description: A customer support platform that captures tickets, conversations, and resolution metadata used for support operations and customer experience analytics.
-
-              - name: HubSpot
-                description: A marketing, sales, and CRM platform that tracks leads, campaigns, customer interactions, and funnel metrics for growth and lifecycle analytics.
-
-          - name: Event and Log Sources
-            description: Systems that generate high-volume streams of behavioral events and technical logs from applications, devices, and infrastructure.
-            children:
-              - name: Segment
-                description: A customer data platform that collects, validates, and routes product and customer events from applications to analytics, marketing, and data warehouse destinations.
-              - name: RudderStack
-                description: An open-core event pipeline and customer data platform that routes application events into data warehouses, product analytics, and downstream tools with a warehouse-first architecture.
-              - name: Application Logs
-                description: Machine-generated records from applications and services that capture errors, performance metrics, and operational behavior for debugging, monitoring, and reliability analysis.
-              - name: IoT Devices
-                description: Physical devices and sensors that continuously emit telemetry, measurements, and status updates as event streams for monitoring, analytics, and automation.
-
-      - name: Ingestion
-        description: Tools that extract data from operational systems and deliver it into analytics platforms using batch or streaming pipelines.
+      - name: SaaS Applications
+        description: Cloud software systems that hold business data such as customers, billing, and support.
         children:
-          - name: Batch ELT and Replication
-            description: Systems that periodically copy data from source databases and SaaS applications into warehouses or data lakes, usually loading raw data and transforming it later.
-            children:
-              - name: Fivetran
-                description: A fully managed ELT service focused on reliable, low-ops replication of databases and SaaS sources into analytics systems.
+          - name: Salesforce
+            description: A cloud-based CRM platform that manages customer accounts, sales pipelines, support interactions, and related business data used for revenue and customer analytics.
 
-              - name: Airbyte
-                description: An open and extensible ELT platform that prioritizes flexibility and custom connectors, with options for self-hosting or managed deployment.
+          - name: Stripe
+            description: A payments and billing platform that processes online transactions and emits detailed financial, customer, and event data for revenue, usage, and fraud analytics.
 
-              - name: Stitch
-                description: A lightweight, SaaS-based ELT tool optimized for fast setup and simple data replication for small to mid-sized teams.
+          - name: Zendesk
+            description: A customer support platform that captures tickets, conversations, and resolution metadata used for support operations and customer experience analytics.
 
-          - name: Streaming Ingestion
-            description: Platforms that ingest and distribute continuous streams of events and messages in near real time.
-            children:
-              - name: Apache Kafka
-                description: The gold standard. An OSS distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
+          - name: HubSpot
+            description: A marketing, sales, and CRM platform that tracks leads, campaigns, customer interactions, and funnel metrics for growth and lifecycle analytics.
 
-              - name: Confluent
-                description: Kafka as a service.
-
-              - name: Apache Pulsar
-                description: An open source alternative to Kafka with better replication and less mindshare
-
-          - name: Change Data Capture
-            description: Technologies that monitor databases for inserts, updates, and deletes and stream those changes to downstream systems in real time.
-            children:
-              - name: Debezium
-                description: An open-source change data capture platform that streams database changes from systems like Postgres and MySQL into Kafka and other downstream consumers.
-              - name: Neon
-                description: Databricks' serverless, Postgres-compatible operational database; often paired with WAL-based CDC to stream row-level changes into analytics and AI systems. 
-
-
-      - name: Transformation and Modeling
-        description: Processes that clean, join, validate, and shape raw data into analytics-ready tables.
+      - name: Event and Log Sources
+        description: Systems that generate high-volume streams of behavioral events and technical logs from applications, devices, and infrastructure.
         children:
-          - name: SQL-based ELT
-            description: Extract-load-transform workflows that transform data inside the warehouse/lakehouse.
-            children:
-              - name: dbt
-                description: ELT framework for building, testing, versioning, and orchestrating analytics model.
+          - name: Segment
+            description: A customer data platform that collects, validates, and routes product and customer events from applications to analytics, marketing, and data warehouse destinations.
+          - name: RudderStack
+            description: An open-core event pipeline and customer data platform that routes application events into data warehouses, product analytics, and downstream tools with a warehouse-first architecture.
+          - name: Application Logs
+            description: Machine-generated records from applications and services that capture errors, performance metrics, and operational behavior for debugging, monitoring, and reliability analysis.
+          - name: IoT Devices
+            description: Physical devices and sensors that continuously emit telemetry, measurements, and status updates as event streams for monitoring, analytics, and automation.
 
-          - name: Distributed Processing
-            description: Engines for large-scale batch and streaming transformations that require distributed compute.
-            children:
-              - name: Apache Spark
-                description: Optimized for throughput over latency, typically used for batch and high latency streaming (>10 seconds).
-              - name: Apache Flink
-                description: Optimized for latency over throughput, typically used for low latency streaming.
-
-      - name: Orchestration 
-        description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
+  - name: Ingestion
+    description: Tools that extract data from data sources and load it into the data stack.
+    children:
+      - name: Batch ELT and Replication
+        description: Systems that periodically copy data from source databases and SaaS applications into warehouses or data lakes, usually loading raw data and transforming it later.
         children:
-          - name: Airflow
-            description: A scheduler-first solution
+          - name: Fivetran
+            description: A fully managed ELT service focused on reliable, low-ops replication of databases and SaaS sources into analytics systems.
 
-          - name: Dagster
-            description: Data-asset–centric and type-aware pipelines
+          - name: Airbyte
+            description: An open and extensible ELT platform that prioritizes flexibility and custom connectors, with options for self-hosting or managed deployment.
 
-          - name: Prefect
-            description: Developer-first and Python-oriented
+          - name: Stitch
+            description: A lightweight, SaaS-based ELT tool optimized for fast setup and simple data replication for small to mid-sized teams.
+
+      - name: Streaming Ingestion
+        description: Platforms that ingest and distribute continuous streams of events and messages in near real time.
+        children:
+          - name: Apache Kafka
+            description: The gold standard. An OSS distributed event streaming platform used to collect, buffer, and distribute high-throughput event and log data.
+
+          - name: Confluent
+            description: Kafka as a service.
+
+          - name: Apache Pulsar
+            description: An open source alternative to Kafka with better replication and less mindshare
+
+      - name: Change Data Capture
+        description: Technologies that monitor databases for inserts, updates, and deletes and stream those changes to downstream systems in real time.
+        children:
+          - name: Debezium
+            description: An open-source change data capture platform that streams database changes from systems like Postgres and MySQL into Kafka and other downstream consumers.
+          - name: Neon
+            description: Databricks' serverless, Postgres-compatible operational database; often paired with WAL-based CDC to stream row-level changes into analytics and AI systems. 
+
 
   - name: Storage Layer
-    description: The systems that store analytical data and provide the foundation for querying, including warehouses, object storage, file formats, and table formats.
+    description: Storing structured and semi-structured data for efficient querying.
     layout: stack
     children:
 
@@ -188,8 +154,34 @@ analytics_layer_cake:
           - name: Apache Hudi
             description: Optimized for CDC and upserts.
 
+  - name: Transformation 
+    description: Processes that clean, join, validate, and shape raw data into analytics-ready tables.
+    children:
+      - name: Distributed Processing
+        description: Engines for large-scale batch and streaming transformations that require distributed compute.
+        children:
+          - name: Apache Spark
+            description: Optimized for throughput over latency, typically used for batch and high latency streaming (>10 seconds).
+          - name: Apache Flink
+            description: Optimized for latency over throughput, typically used for low latency streaming.
+
+      - name: Orchestration 
+        description: Systems that coordinate and monitor data pipelines, ensuring tasks run in the correct order and recover from failures.
+        children:
+          - name: dbt
+            description: SQL-based extract-load-transform framework for building, testing, versioning, and orchestrating analytics model.
+
+          - name: Airflow
+            description: A scheduler-first solution
+
+          - name: Dagster
+            description: Data-asset–centric and type-aware pipelines
+
+          - name: Prefect
+            description: Developer-first and Python-oriented
+
   - name: Query and Compute
-    description: Engines that execute SQL and analytical queries over data stored in warehouses, lakes, and lakehouse platforms.
+    description: Engines that execute SQL queries over data stored in warehouses, lakes, and lakehouse platforms.
     children:
       - name: Distributed SQL Engines
         description: Scalable SQL engines designed to query large datasets across clusters of machines, often directly over object storage.
@@ -224,31 +216,11 @@ analytics_layer_cake:
           - name: DuckDB
             description: An in-process analytical database designed for fast SQL queries over local files such as Parquet and CSV, commonly used for data science and embedded analytics.
 
-  - name: Semantic Layer
-    description: Business-facing definitions of metrics and dimensions that ensure consistent meaning across analytics tools, dashboards, and users.
+
+  - name: Analytics
+    description: Tools that deliver analytics to people and operational systems.
     children:
-      - name: BI Semantic Models
-        description: Semantic layers built into BI tools that define metrics, dimensions, and relationships for dashboards and reports.
-        children:
-          - name: Looker
-            description: A BI platform with a built-in modeling language that defines metrics and dimensions as governed data models for consistent analytics.
-
-          - name: Power BI
-            description: Microsoft’s business intelligence platform that includes a semantic model for defining measures, relationships, and business logic.
-
-      - name: Standalone Metrics Layers
-        description: Dedicated systems that define and serve consistent metrics to multiple analytics and operational tools.
-        children:
-          - name: dbt Semantic Layer
-            description: A metrics and semantic framework built on top of dbt models that exposes consistent business metrics to BI tools and applications.
-
-          - name: Cube
-            description: A headless semantic layer that provides a unified metrics API for serving analytics to dashboards, applications, and embedded use cases.
-
-  - name: Output
-    description: Tools and platforms that deliver analytics to people, applications, and operational systems, including dashboards, notebooks, and data activation.
-    children:
-      - name: Business Intelligence
+      - name: Business Intelligence 
         description: Dashboards and visualizations.
         children:
           - name: Tableau
@@ -316,6 +288,27 @@ analytics_layer_cake:
 
           - name: RudderStack
             description: A customer data platform that supports both event routing and warehouse-to-SaaS data activation.
+
+      - name: Semantic Layer
+        description: Business-facing definitions of metrics and dimensions that ensure consistent meaning across analytics tools, dashboards, and users.
+        children:
+          - name: BI Semantic Models
+            description: Semantic layers built into BI tools that define metrics, dimensions, and relationships for dashboards and reports.
+            children:
+              - name: Looker
+                description: A BI platform with a built-in modeling language that defines metrics and dimensions as governed data models for consistent analytics.
+
+              - name: Power BI
+                description: Microsoft’s business intelligence platform that includes a semantic model for defining measures, relationships, and business logic.
+
+          - name: Standalone Metrics Layers
+            description: Dedicated systems that define and serve consistent metrics to multiple analytics and operational tools.
+            children:
+              - name: dbt Semantic Layer
+                description: A metrics and semantic framework built on top of dbt models that exposes consistent business metrics to BI tools and applications.
+
+              - name: Cube
+                description: A headless semantic layer that provides a unified metrics API for serving analytics to dashboards, applications, and embedded use cases.
 
   - name: Catalogs
     description: Catalogs are about discovery, access control, lineage, and governance.
